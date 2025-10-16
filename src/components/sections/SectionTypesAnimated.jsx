@@ -92,7 +92,7 @@ function SceneSnapGhost({ ac1, ac2, basePath }) {
   return (
     <div className="snap-scene ecosys" style={{ "--ac1": ac1, "--ac2": ac2 }}>
       <div className="snap-ghost">
-        <img src={`${basePath}/snapchat_logo.webp`} alt="Snapchat" />
+        <img src={`/snapchat_logo.webp`} alt="Snapchat" />
         <span className="ring r1" />
         <span className="ring r2" />
         <span className="ring r3" />
@@ -125,7 +125,7 @@ function SceneTelegramFeed({ ac1, ac2, basePath }) {
     <div className="tg-scene ecosys" style={{ "--ac1": ac1, "--ac2": ac2 }}>
       <div className="tg-window">
         <div className="tg-header">
-          <img src={`${basePath}/telegram_logo.png`} alt="Telegram" />
+          <img src={`/telegram_logo.png`} alt="Telegram" />
           <strong>Channel</strong>
         </div>
         <div className="tg-body">
@@ -191,7 +191,7 @@ function SceneLinkedInLeadCard({ ac1, ac2, basePath = "/hizmeticonlar" }) {
     <div className="lki2-scene">
       <div className="lki2-card">
         <div className="lki2-head">
-          <img src={`${basePath}/linkedin_logo.webp`} alt="LinkedIn" />
+          <img src={`/linkedin_logo.webp`} alt="LinkedIn" />
           <span>LinkedIn</span>
           <b className="lki2-pill" style={{ background: grad }}>PROMOTED</b>
         </div>
@@ -535,20 +535,20 @@ function SectionTypesAnimated({ title, desc, items = [], themeKey, basePath = "/
   const [ac1 = "#7C3AED", ac2 = "#22D3EE"] = t.accents || ["#7C3AED", "#22D3EE"];
 
   const ICON = {
-    google: `${basePath}/googleadslogo.png`,
-    meta: `${basePath}/meta_logo.png`,
-    tiktok: `${basePath}/tiktok_logo.png`,
-    snapchat: `${basePath}/snapchat_logo.svg`,
-    telegram: `${basePath}/telegram_logo.svg`,
-    linkedin: `${basePath}/linkedin_logo.webp`,
-    x: `${basePath}/x_logo.svg`,
-    yandex: `${basePath}/yandex_logo.svg`,
-    search: `${basePath}/google_search.png`,
-    youtube: `${basePath}/google_youtube.png`,
-    display: `${basePath}/google_display.svg`,
-    discover: `${basePath}/google_discovery.png`,
-    gmail: `${basePath}/google_gmail.png`,
-    maps: `${basePath}/google_maps.png`,
+    google: `/googleadslogo.png`,
+    meta: `/meta_logo.png`,
+    tiktok: `/tiktok_logo.png`,
+    snapchat: `/snapchat_logo.svg`,
+    telegram: `/telegram_logo.svg`,
+    linkedin: `/linkedin_logo.webp`,
+    x: `/x_logo.svg`,
+    yandex: `/yandex_logo.svg`,
+    search: `/google_search.png`,
+    youtube: `/google_youtube.png`,
+    display: `/google_display.svg`,
+    discover: `/google_discovery.png`,
+    gmail: `/google_gmail.png`,
+    maps: `/google_maps.png`,
   };
 
   const Scene = {
