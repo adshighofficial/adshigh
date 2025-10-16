@@ -2,10 +2,19 @@ import React from "react";
 import { SERVICE_THEMES } from "../../themes/serviceThemes";
 import MultiP from "../common/MultiP";
 
-/* küçük uydu chip */
+/* 560×420 baz tuvalde verilen px’i yüzdeye çevirir */
+const BASE_W = 560;
+const BASE_H = 420;
+
 function EcoNode({ x, y, img, label, pill }) {
+  const leftPct = (x / BASE_W) * 100;
+  const topPct  = (y / BASE_H) * 100;
+
   return (
-    <div className="eco-node" style={{ left: `${x}px`, top: `${y}px` }}>
+    <div
+      className="eco-node"
+      style={{ left: `${leftPct}%`, top: `${topPct}%` }}
+    >
       <div className="eco-badge">{pill}</div>
       <div className="eco-chip">
         {img ? <img src={img} alt={label} /> : null}
@@ -15,13 +24,17 @@ function EcoNode({ x, y, img, label, pill }) {
   );
 }
 
-/* --- GOOGLE: ekosistem --- */
 function SceneGoogleEco({ ac1, ac2, ICON }) {
   return (
-    <div className="ecosys" style={{ "--ac1": ac1, "--ac2": ac2 }}>
+    <div className="ecosys google-eco" style={{ "--ac1": ac1, "--ac2": ac2 }}>
       <div className="eco-bg" />
-      <svg className="eco-links" viewBox="0 0 560 420" preserveAspectRatio="none">
-        <defs><filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur in="SourceGraphic" stdDeviation="1.2" /></filter></defs>
+
+      <svg className="eco-links" viewBox="0 0 560 420" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" />
+          </filter>
+        </defs>
         <path d="M280,220 C330,180 380,170 440,150" className="eco-path p1" />
         <path d="M280,220 C330,250 390,265 455,300" className="eco-path p2" />
         <path d="M280,220 C240,170 190,160 120,150" className="eco-path p3" />
@@ -39,12 +52,14 @@ function SceneGoogleEco({ ac1, ac2, ICON }) {
         <em>Signals • Bidding • Delivery</em>
       </div>
 
-      <EcoNode x="458" y="140" img={ICON.youtube} label="YouTube" pill="Video" />
-      <EcoNode x="460" y="300" img={ICON.discover} label="Discover" pill="Feed" />
-      <EcoNode x="100" y="145" img={ICON.search} label="Search" pill="Text" />
-      <EcoNode x="100" y="305" img={ICON.display} label="Display" pill="GDN" />
-      <EcoNode x="458" y="220" img={ICON.gmail} label="Gmail" pill="Promo" />
-      <EcoNode x="100" y="220" img={ICON.maps} label="Maps" pill="Local" />
+      {/* Not: x/y artık px değil, 560×420 baz tuvaline göre piksel;
+          bileşen içinde yüzdeye çevriliyor, responsive yerleşiyor */}
+      <EcoNode x={458} y={140} img={ICON.youtube}   label="YouTube"  pill="Video" />
+      <EcoNode x={460} y={300} img={ICON.discover}  label="Discover" pill="Feed" />
+      <EcoNode x={100} y={145} img={ICON.search}    label="Search"   pill="Text" />
+      <EcoNode x={100} y={305} img={ICON.display}   label="Display"  pill="GDN" />
+      <EcoNode x={458} y={220} img={ICON.gmail}     label="Gmail"    pill="Promo" />
+      <EcoNode x={100} y={220} img={ICON.maps}      label="Maps"     pill="Local" />
     </div>
   );
 }

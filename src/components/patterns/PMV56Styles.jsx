@@ -848,7 +848,7 @@ export default function PMV56Styles() {
 }
 
 @media (max-width: 560px){
-  /* MEVCUT KODLARINIZI KORUYUN VE TILSIMLI KÜÇÜLTME KURALINI EKLEYİN */
+  /* MEVCUT KODLARINIZ */
   .pmv56 .types-cards-grid { grid-template-columns: 1fr; }
   
   .pmv56 .ecosys { 
@@ -857,14 +857,18 @@ export default function PMV56Styles() {
   }
   .pmv56 .eco-links { 
     height: 320px; 
+    /* KRİTİK KURALI BURAYA EKLEYİN: SVG Kapsayıcısını Küçült ve Taşı */
+    transform: scale(.8) translateX(-10px); 
   }
   .pmv56 .eco-center { 
-    /* <--- YENİ EKLENEN/GÜNCELLENEN KURAL (EN ÖNEMLİSİ) */
-    transform:translate(-50%,-50%) scale(.8); 
+    transform:translate(-50%,-50%) scale(.8); /* Bu kural zaten mevcuttu */
   }
   .pmv56 .types-section { padding: 56px 0 52px; }
 }
-  /* ==== PMV56 — Global Typography & Alignment Fix ==== */
+
+
+
+/* ==== PMV56 — Global Typography & Alignment Fix ==== */
 .pmv56 {
   --rhythm: 12px;                 /* dikey ritim */
   --lh: 1.6;                      /* metin satır yüksekliği */
@@ -1730,7 +1734,61 @@ export default function PMV56Styles() {
 .pmv56 .media-scene.fan-orbit .fo-dot.d2{ right:16%; top:48%; animation-delay:.4s }
 .pmv56 .media-scene.fan-orbit .fo-dot.d3{ left:26%; bottom:18%; animation-delay:.8s }
 @keyframes foDot{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-8px) } }  
+/* --- Genel “sahne” area --- */
+.ecosys {
+  position: relative;
+  width: 100%;
+  /* Google ekosistem sahnesi 560×420 tasarlanmış → 4/3 oranı */
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+  overflow: hidden;
+}
 
+/* SVG linkler tüm sahneyi kaplasın */
+.ecosys .eco-links {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Mutlaka yüzde konumlama kullanıyoruz (JS tarafında dönüştürüyoruz) */
+.ecosys .eco-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+/* Merkez kart */
+.ecosys .eco-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 46%;
+  min-width: 220px; /* desktop’ta okunaklı */
+  text-align: center;
+}
+
+/* ---- Google özel küçük dokunuşlar ---- */
+.google-eco .eco-badge { font-size: 12px; }
+.google-eco .eco-chip  { white-space: nowrap; }
+
+/* --- Tablet / Mobil --- */
+@media (max-width: 980px) {
+  .ecosys { aspect-ratio: 4 / 3; } /* oran koru */
+  .ecosys .eco-center { width: 54%; min-width: 0; }
+  .google-eco .eco-badge { font-size: 11px; }
+}
+
+@media (max-width: 640px) {
+  .ecosys {
+    /* yüksekliği biraz büyütüp daha ferah bırakmak istersen: */
+    /* aspect-ratio sabit, parent genişliğine göre yükseklik hesaplanır */
+  }
+  .ecosys .eco-center { width: 60%; }
+  .google-eco .eco-badge { font-size: 10px; }
+  .google-eco .eco-chip  { transform: scale(0.95); transform-origin: center; }
+}
 `}</style>
   );
 }
