@@ -651,7 +651,7 @@ function Home({ lang, setLang, TXT }) {
                 <div className="strip-track">
                   {BELT.map((b, i) => (
                     <span className="strip-pill" key={i} title={b.alt}>
-                      <img src={`/brands/${b.file}`} alt={b.alt} />
+                     <img src={\/brands/${b.file}\`} alt={b.alt} />` | `{b.file}`**} alt={b.alt} />`
                     </span>
                   ))}
                 </div>
