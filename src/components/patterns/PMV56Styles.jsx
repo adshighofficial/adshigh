@@ -834,16 +834,34 @@ export default function PMV56Styles() {
 
 /* === Mobil uyum — 1024 / 768 / 560 kırılımları === */
 @media (max-width: 1024px){
+  /* Mevcut 1024px kurallarınız */
   .pmv56 .types-split { grid-template-columns: 1fr; gap:22px; }
   .pmv56 .ecosys { order:2 }
 }
+
 @media (max-width: 768px){
+  /* MEVCUT KODLARINIZI KORUYUN VE YÜKSEKLİK DÜZELTMESİNİ EKLEYİN */
+  .pmv56 .ecosys { 
+    height: 380px; /* <--- YENİ EKLENEN/GÜNCELLENEN KURAL */
+  }
   .pmv56 .types-cards-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px; }
 }
+
 @media (max-width: 560px){
+  /* MEVCUT KODLARINIZI KORUYUN VE TILSIMLI KÜÇÜLTME KURALINI EKLEYİN */
   .pmv56 .types-cards-grid { grid-template-columns: 1fr; }
-  .pmv56 .eco-links { height: 360px; }
-  .pmv56 .eco-center { transform:translate(-50%,-50%) scale(.94); }
+  
+  .pmv56 .ecosys { 
+    height: 320px; 
+    border-radius:12px 
+  }
+  .pmv56 .eco-links { 
+    height: 320px; 
+  }
+  .pmv56 .eco-center { 
+    /* <--- YENİ EKLENEN/GÜNCELLENEN KURAL (EN ÖNEMLİSİ) */
+    transform:translate(-50%,-50%) scale(.8); 
+  }
   .pmv56 .types-section { padding: 56px 0 52px; }
 }
   /* ==== PMV56 — Global Typography & Alignment Fix ==== */
