@@ -1,0 +1,25 @@
+Sayfa,Alt Başlık / Bölüm,Açıklama / İçerik Notu
+Header (her sayfada),Logo,AdsHigh logo (sol üst)
+Header (her sayfada),Anasayfa,Hero, istatistikler, hizmet özetleri
+Header (her sayfada),Hizmetlerimiz,Alt menü: Google Ads, Meta Ads, TikTok Ads, LinkedIn Ads, 3rd Party
+Header (her sayfada),Başarı Hikayeleri,Referans logoları, vaka çalışmaları
+Header (her sayfada),Hakkımızda,Şirket vizyonu, değerler, ekip
+Header (her sayfada),İletişim,Form + iletişim bilgileri
+Anasayfa,Hero,Manşet başlık + CTA
+Anasayfa,İstatistikler,CPA -28%, ROAS +41%, x3 müşteri, 24/7 optimizasyon
+Anasayfa,Hizmetlerimiz,3 kutu halinde kısa özet
+Anasayfa,Referanslar,Logo listesi
+Anasayfa,Hakkımızda Kısa,Mini preview
+Anasayfa,Contact CTA,Form yönlendirme
+Hizmetlerimiz,Google Ads,Detaylı açıklama + “Daha fazlası” CTA
+Hizmetlerimiz,Meta Ads,Detaylı açıklama + “Daha fazlası” CTA
+Hizmetlerimiz,TikTok Ads,Detaylı açıklama + “Daha fazlası” CTA
+Hizmetlerimiz,LinkedIn Ads,Detaylı açıklama + “Daha fazlası” CTA
+Hizmetlerimiz,3rd Party,Detaylı açıklama + “Daha fazlası” CTA
+Başarı Hikayeleri,Referans Logoları,Önce-sonra rakamlar + müşteri yorumları
+Hakkımızda,Misyon/Vizyon,Şirket misyonu, değerler
+Hakkımızda,Ekip,Foto + kısa bio
+İletişim,Form,İsim, mail, telefon, şirket, mesaj alanı
+İletişim,Harita + Sosyal Medya,Google Maps + Linkedin, Instagram, Facebook linkleri
+Footer (her sayfada),Copyright,"© 2024 AdsHigh"
+Footer (her sayfada),Linkler,Gizlilik, Çerezler, KVKK

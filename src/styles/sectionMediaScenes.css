@@ -1,0 +1,196 @@
+/* ==== GENEL YERLEŞİM ==== */
+.pmv56 .why-us-section .why-us-text p{
+  white-space: normal; text-align: center; margin-left:auto; margin-right:auto;
+  max-width: 68ch; line-height: 1.65;
+}
+.pmv56 .why-us-section .why-us-image{width:100%;max-width:620px;margin-left:auto;margin-right:auto;position:relative}
+.pmv56 .why-us-section .why-us-image .media-scene{display:block;min-height:340px;position:relative}
+
+/* ================= FAN ORBIT (3. alan) ================= */
+.pmv56 .media-scene.fan-orbit{
+  position:relative; height:340px; border-radius:16px; overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 50% 50%, rgba(148,163,255,.08), transparent 60%),
+    linear-gradient(180deg, rgba(14,18,40,.82), rgba(12,16,34,.88));
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 10px 28px rgba(0,0,0,.32), inset 0 0 0 1px rgba(255,255,255,.04);
+}
+
+.pmv56 .media-scene.fan-orbit .fo-core{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  text-align:center; padding:14px 16px; border-radius:14px; color:#fff;
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); backdrop-filter: blur(6px);
+  box-shadow:0 8px 22px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.pmv56 .media-scene.fan-orbit .fo-core strong{ font:900 14px/1 Inter }
+.pmv56 .media-scene.fan-orbit .fo-core em{ font:700 11px/1.2 Inter; opacity:.8 }
+.pmv56 .media-scene.fan-orbit .fo-core-ring{
+  position:absolute; inset:-18px; border-radius:16px; border:1px dashed rgba(255,255,255,.18);
+  -webkit-mask: radial-gradient(70% 70% at 50% 50%, transparent 52%, black 53%);
+          mask: radial-gradient(70% 70% at 50% 50%, transparent 52%, black 53%);
+  animation: foSpin 16s linear infinite;
+}
+@keyframes foSpin{ to{ transform: rotate(360deg) } }
+
+/* Chip’ler */
+.pmv56 .media-scene.fan-orbit .fo-chip{
+  /* kritik varsayılanlar (değişken gelmezse de görünür kalsın) */
+  --ac1: #7C3AED; --ac2: #22D3EE;
+  --r: 120px; --rot: 0deg; --delay: 0s;
+
+  position:absolute; left:50%; top:50%;
+  transform: rotate(var(--rot)) translate(var(--r)) rotate(calc(var(--rot)*-1));
+  transform-origin: center;
+  padding:8px 12px; border-radius:999px; z-index:3;
+
+  /* Eğer --ac1/--ac2 yukarıdan gelirse onları kullanır; gelmezse yukarıdaki varsayılanlar devreye girer */
+  background: linear-gradient(90deg, var(--ac1), var(--ac2));
+  color:#0b1020; font:800 12.5px/1 Inter; letter-spacing:.2px;
+  box-shadow:0 8px 20px rgba(0,0,0,.34);
+  animation: foOrbit 10s linear infinite; animation-delay: var(--delay);
+}
+.pmv56 .media-scene.fan-orbit .fo-chip span{ display:block }
+.pmv56 .media-scene.fan-orbit .c1{ --rot:  -8deg;  --delay: .0s }
+.pmv56 .media-scene.fan-orbit .c2{ --rot:  22deg;  --delay: .2s }
+.pmv56 .media-scene.fan-orbit .c3{ --rot:  52deg;  --delay: .4s }
+.pmv56 .media-scene.fan-orbit .c4{ --rot:  82deg;  --delay: .6s }
+.pmv56 .media-scene.fan-orbit .c5{ --rot: 112deg;  --delay: .8s }
+.pmv56 .media-scene.fan-orbit .c6{ --rot: 142deg;  --delay: 1.0s }
+
+@keyframes foOrbit{
+  0%   { transform: rotate(var(--rot)) translate(var(--r)) rotate(calc(var(--rot)*-1)); }
+  50%  { transform: rotate(calc(var(--rot) + 6deg)) translate(calc(var(--r) + 8px)) rotate(calc((var(--rot) + 6deg)*-1)); }
+  100% { transform: rotate(var(--rot)) translate(var(--r)) rotate(calc(var(--rot)*-1)); }
+}
+
+/* Parallax noktalar */
+.pmv56 .media-scene.fan-orbit .fo-dot{
+  /* yine görünür kalması için varsayılan */
+  --ac1: #7C3AED;
+  position:absolute; width:8px; height:8px; border-radius:999px; background: var(--ac1);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--ac1) 70%, transparent);
+  opacity:.6; animation: foDot 6s ease-in-out infinite;
+}
+.pmv56 .media-scene.fan-orbit .fo-dot.d1{ left:18%; top:36% }
+.pmv56 .media-scene.fan-orbit .fo-dot.d2{ right:16%; top:48%; animation-delay:.4s }
+.pmv56 .media-scene.fan-orbit .fo-dot.d3{ left:26%; bottom:18%; animation-delay:.8s }
+@keyframes foDot{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-8px) } }
+
+/* ================= TILE WAVE (fallback) ================= */
+.pmv56 .media-scene.tile-wave{
+  position:relative; height:340px; border-radius:16px;
+  background:
+    radial-gradient(120% 90% at 50% 50%, rgba(148,163,255,.08), transparent 60%),
+    linear-gradient(180deg, rgba(14,18,40,.82), rgba(12,16,34,.88));
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 10px 28px rgba(0,0,0,.32), inset 0 0 0 1px rgba(255,255,255,.04);
+  overflow:hidden;
+}
+.pmv56 .tile-wave .tw-wrap{
+  position:absolute; left:16px; right:16px; top:16px; bottom:64px;
+  display:grid; grid-template-columns:repeat(6,1fr); grid-auto-rows:56px; gap:10px;
+}
+.pmv56 .tile-wave .tw{
+  position:relative; border-radius:12px; overflow:hidden;
+  background:
+    linear-gradient(150deg, color-mix(in srgb, var(--ac1, #7C3AED) 24%, #0b1020) 0%, #0f172a 60%),
+    linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 6px 16px rgba(0,0,0,.28);
+  transform: translateZ(0);
+  animation: twFloat 3.2s ease-in-out infinite;
+}
+.pmv56 .tile-wave .tw::before{
+  content:""; position:absolute; inset:-40% -60%;
+  background: linear-gradient(120deg, transparent 35%, color-mix(in srgb, var(--ac1, #7C3AED) 70%, transparent) 50%, transparent 65%);
+  transform: translateX(-60%) rotate(12deg);
+  animation: twSweep 3.4s linear infinite;
+  opacity:.28;
+}
+.pmv56 .tile-wave .tw::after{
+  content:""; position:absolute; left:10px; right:10px; bottom:10px; height:6px;
+  border-radius:6px; background: linear-gradient(90deg, var(--ac1, #7C3AED), var(--ac2, #22D3EE));
+  opacity:.6; transform: scaleX(.82); transform-origin:left center;
+  animation: twMeter 2.4s ease-in-out infinite;
+}
+.pmv56 .tile-wave .tw-legend{
+  position:absolute; left:16px; right:16px; bottom:16px;
+  display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
+}
+.pmv56 .tile-wave .tw-legend .pill{
+  padding:8px 12px; border-radius:999px;
+  background: linear-gradient(90deg, var(--ac1, #7C3AED), var(--ac2, #22D3EE));
+  color:#0b1020; font:800 12.5px/1 Inter; letter-spacing:.2px;
+  box-shadow:0 8px 20px rgba(0,0,0,.34);
+}
+@keyframes twFloat{ 0%,100%{ transform: translateY(0) scale(1) } 50%{ transform: translateY(-2px) scale(1.02) } }
+@keyframes twSweep{ 0%{ transform: translateX(-60%) rotate(12deg) } 100%{ transform: translateX(60%) rotate(12deg) } }
+@keyframes twMeter{ 0%,100%{ transform: scaleX(.82) } 50%{ transform: scaleX(1) } }
+
+/* ================= INSIGHT DECK (5. alan) ================= */
+.pmv56 .media-scene.insight-deck{
+  position:relative; border-radius:16px; padding:14px;
+  background:linear-gradient(180deg, rgba(16,22,45,.92), rgba(14,18,34,.92));
+  border:1px solid rgba(255,255,255,.12); box-shadow:0 10px 28px rgba(0,0,0,.34);
+}
+.pmv56 .media-scene.insight-deck .id-card{
+  display:grid; grid-template-columns: 1.1fr .9fr; gap:12px; align-items:stretch;
+}
+.pmv56 .id-line{ grid-column:1/3; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12);
+  border-radius:12px; padding:10px; position:relative; overflow:hidden; }
+.pmv56 .id-line-svg{ width:100%; height:120px; color: var(--ac1, #7C3AED); }
+.pmv56 .id-line-stroke{
+  fill:none; stroke: currentColor; stroke-width:1.6;
+  stroke-dasharray: 240; stroke-dashoffset: 240;
+  animation: idDraw 2.2s ease-out forwards, idBreathe 3.6s ease-in-out infinite 2.2s;
+}
+.pmv56 .id-line-fill{ fill: url(#idFill); }
+@keyframes idDraw{ to{ stroke-dashoffset: 0 } }
+@keyframes idBreathe{ 0%,100%{ opacity:.22 } 50%{ opacity:.36 } }
+.pmv56 .id-line-kpis{ position:absolute; left:10px; right:10px; bottom:8px; display:flex; gap:10px; justify-content:space-between; }
+.pmv56 .id-line-kpis div{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+  padding:8px 10px; border-radius:10px; color:#eaf2ff; font:700 12px/1.1 Inter; }
+.pmv56 .id-line-kpis span{ display:block; opacity:.8; font-weight:700; font-size:11px }
+.pmv56 .id-line-kpis b{ font-size:14px }
+.pmv56 .id-donut{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12);
+  border-radius:12px; padding:12px; display:grid; grid-template-columns:120px 1fr; gap:10px; align-items:center; }
+.pmv56 .id-donut .ring{ position:relative; width:110px; height:110px; border-radius:999px; display:grid; place-items:center;
+  background: radial-gradient(circle at 50% 50%, #0b1020 46%, transparent 47% 100%); }
+.pmv56 .id-donut .slice{ position:absolute; inset:0; border-radius:999px; mask: radial-gradient(circle at 50% 50%, transparent 0 46%, black 47%); }
+.pmv56 .id-donut .slice.s1{ background: conic-gradient(from -90deg, var(--ac1, #7C3AED) 0 44%, transparent 44% 360deg) }
+.pmv56 .id-donut .slice.s2{ background: conic-gradient(from 68deg,  var(--ac2, #22D3EE) 0 28%, transparent 28% 360deg) }
+.pmv56 .id-donut .slice.s3{ background: conic-gradient(from 160deg, #7dd3fc 0 18%, transparent 18% 360deg) }
+.pmv56 .id-donut .center{ position:absolute; inset:0; display:grid; place-items:center; color:#eaf2ff }
+.pmv56 .id-donut .center b{ font:900 12px/1 Inter; opacity:.85 }
+.pmv56 .id-donut .center span{ font:900 18px/1.1 Inter }
+.pmv56 .id-donut .legend i{ display:flex; align-items:center; gap:8px; font:700 11.5px/1.1 Inter; color:#d7e2ff; margin:4px 0 }
+.pmv56 .id-donut .legend em{ display:inline-block; width:10px; height:10px; border-radius:3px; }
+.pmv56 .id-donut .legend .k1{ background: var(--ac1, #7C3AED) }
+.pmv56 .id-donut .legend .k2{ background: var(--ac2, #22D3EE) }
+.pmv56 .id-donut .legend .k3{ background: #7dd3fc }
+.pmv56 .id-table{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12);
+  border-radius:12px; padding:12px; display:grid; gap:6px; color:#eaf2ff; position:relative; overflow:hidden; }
+.pmv56 .id-table .row{ display:grid; grid-template-columns:1.3fr .7fr .7fr .5fr; gap:8px; align-items:center; font:700 12px/1.2 Inter; }
+.pmv56 .id-table .row.h{ opacity:.85 }
+.pmv56 .id-table .row .up{ color:#86efac } .pmv56 .id-table .row .down{ color:#fda4af }
+.pmv56 .id-table .pulse-bar{ position:absolute; left:10px; right:10px; bottom:10px; height:6px; border-radius:8px;
+  background: linear-gradient(90deg, var(--ac1, #7C3AED), var(--ac2, #22D3EE)); transform-origin:left center; animation: idPulse 1.6s ease-in-out infinite; }
+@keyframes idPulse{ 0%,100%{ transform: scaleX(.82)} 50%{ transform: scaleX(1)} }
+
+/* ---- metrik kutuları ---- */
+.pmv56 .why-us-section .metric-row{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:10px;margin-top:14px
+}
+.pmv56 .why-us-section .metric{
+  padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.03);
+  border:1px solid rgba(148,163,255,.12); color:#fff
+}
+.pmv56 .why-us-section .metric h4{font-size:11.5px;margin:0 0 4px;opacity:.85;text-transform:uppercase;letter-spacing:.02em}
+.pmv56 .why-us-section .metric strong{font-size:18px;line-height:1.1}
+
+/* responsive */
+@media (max-width: 960px){
+  .pmv56 .media-scene.tile-wave{ height:300px }
+  .pmv56 .media-scene.insight-deck .id-card{ grid-template-columns:1fr; }
+}

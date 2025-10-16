@@ -1,0 +1,2002 @@
+
+/* =========================
+   Root palette (mor taban)
+========================= */
+:root{
+  --bg-deep:#0f0c20;            /* site zemini – koyu mor */
+  --bg-hero:#171233;            /* hero bandı mor */
+  --bg-panel:#12102a;           /* kart/panel tabanı */
+  --bg-band:#141032;            /* bölüm bantları */
+
+  --ink:#e9e9ef;
+  --ink-muted:#c6c9e9;
+  --line:rgba(255,255,255,.08);
+
+  --brand1:#A78BFA;             /* gradient uçları */
+  --brand2:#67E8F9;
+}
+
+/* =========================
+   Reset & base
+========================= */
+* { box-sizing:border-box }
+html, body, #root { height:100% }
+body{
+  margin:0;
+  background:var(--bg-deep);
+  color:var(--ink);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial
+}
+a{ text-decoration:none; color:inherit }
+img{ display:block; max-width:100%; height:auto }
+
+/* =========================
+   Layout helpers
+========================= */
+.container{ width:min(1220px,95vw); margin:0 auto }
+.section{ padding:80px 0 }
+.section-title{ margin:0 0 18px; font:700 24px/1.2 Inter,system-ui }
+
+/* =========================
+   Header + Lang toggle
+========================= */
+.header{
+  position:sticky; top:0; z-index:80;
+  border-bottom:1px solid var(--line);
+  background:color-mix(in srgb, var(--bg-deep) 60%, #221a50 40%);
+  backdrop-filter:blur(8px)
+}
+.header-grid{
+  display:grid; grid-template-columns:1fr auto 1fr;
+  align-items:center; height:68px; gap:18px
+}
+.header-cta{ display:flex; justify-content:flex-end; gap:10px; align-items:center }
+.center-nav{ justify-self:center }
+.nav{ display:flex; gap:28px; color:#cfd3ff }
+.nav a:hover{ color:#fff }
+
+/* === Logo görseli ayarları (header + footer) === */
+.site-logo{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+
+.site-logo .logo-img{
+  height:22px;   /* header’daki yükseklik */
+  width:auto;
+  display:block;
+}
+
+.header .site-logo .logo-img {
+  height: 42px;  /* 30–42 arası genelde ideal */
+  width: auto;
+}
+
+@media (max-width: 960px) {
+  .header .site-logo .logo-img {
+    height: 44px; /* mobilde küçült */
+  }
+}
+
+.footer .site-logo .logo-img {
+  height: 42px;  /* footer zemininde daha dengeli görünür */
+  width: auto;
+}
+
+@media (max-width: 900px) {
+  .footer .site-logo .logo-img {
+    height: 42px;
+  }
+}
+
+@media (max-width:960px){
+  .site-logo .logo-img{ height:20px; }
+}
+
+/* Dil anahtarı */
+.lang-toggle{
+  display:inline-flex; border:1px solid rgba(255,255,255,.12);
+  border-radius:999px; overflow:hidden; background:rgba(255,255,255,.05)
+}
+.lang-toggle button{
+  height:32px; min-width:44px; padding:0 10px;
+  font-weight:700; font-size:12.5px; letter-spacing:.2px;
+  color:#cfd3ff; background:transparent; border:0; cursor:pointer;
+  transition:background .15s,color .15s
+}
+.lang-toggle button.active{
+  background:linear-gradient(135deg,var(--brand1),var(--brand2));
+  color:#fff
+}
+
+/* CTA buton */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 16px; border-radius:12px; font-weight:700; color:#fff;
+  background:linear-gradient(135deg,var(--brand1),var(--brand2));
+  box-shadow:0 10px 30px rgba(167,139,250,.18);
+  transition:.15s transform
+}
+.btn:hover{ transform:translateY(-1px) }
+.btn.btn-ghost{
+  background:transparent;
+  border:1px solid rgba(255,255,255,.14);
+  color:#e7eaff;
+  box-shadow:none;
+  padding:8px 12px;
+}
+
+@media (max-width:960px){
+  .center-nav{ display:none }
+  .header-grid{ grid-template-columns:auto 1fr auto; height:64px; gap:10px }
+  .header-cta{ gap:8px }
+  .lang-toggle button{ height:26px; min-width:36px; padding:0 8px; font-size:11.5px }
+  .header .btn{ height:32px; padding:6px 10px; font-size:12.5px; background:transparent; border:1px solid rgba(255,255,255,.18); box-shadow:none }
+}
+
+/* =========================
+   Hero (mor band)
+========================= */
+.hero{
+  padding:84px 0 36px;
+  background:
+    radial-gradient(900px 320px at 50% -220px, rgba(124,58,237,.25), transparent 70%),
+    var(--bg-hero);
+  border-bottom:1px solid var(--line);
+}
+.hero-inner{ display:flex; flex-direction:column; align-items:center; text-align:center }
+.logo-gradient{
+  background:linear-gradient(135deg,var(--brand1),var(--brand2));
+  -webkit-background-clip:text; background-clip:text; color:transparent
+}
+.badge{
+  display:inline-flex; align-items:center; justify-content:center;
+  height:36px; border-radius:10px; padding:0 12px; color:#d7dbff;
+  border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.05)
+}
+.headline{ margin:16px 0 8px; font-weight:900; letter-spacing:-.6px; font-size:clamp(28px,7vw,64px); line-height:1.08 }
+.subcopy{ color:var(--ink-muted); max-width:760px }
+@media (max-width:640px){
+  .hero{ padding:64px 0 24px }
+  .badge{ height:32px }
+}
+
+/* =========================
+   Brand strip (akan ikonlar)
+========================= */
+.brand-strip{ padding:12px 0; margin-bottom:22px }
+.strip-rail{
+  position:relative; overflow:hidden; width:100vw; left:50%; transform:translateX(-50%);
+  background:radial-gradient(900px 140px at 50% 120%,rgba(255,255,255,.05),rgba(255,255,255,0));
+  touch-action:pan-x; -webkit-overflow-scrolling:touch;
+}
+.strip-track{
+  display:flex; flex-wrap:nowrap; align-items:center; gap:18px;
+  width:max-content; min-width:180%;
+  padding:10px 14px; animation:marquee-x 32s linear infinite; will-change:transform;
+}
+.strip-pill{
+  display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto;
+  width:54px; height:54px; border-radius:12px; background:#1a1636; border:1px solid rgba(255,255,255,.14)
+}
+.strip-pill img{ width:26px; height:26px; object-fit:contain; filter:drop-shadow(0 2px 6px rgba(0,0,0,.25)) }
+@keyframes marquee-x{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@media (prefers-reduced-motion:reduce){ .strip-track{ animation:none!important }}
+
+/* =========================
+   Services (mor panel)
+========================= */
+#services{
+  position: relative;
+  padding: 32px 0 28px;
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+    radial-gradient(900px 320px at 50% -220px, rgba(124,58,237,.25), transparent 70%),
+    var(--bg-hero);
+  border: 1px solid var(--line);
+  box-shadow: none; /* hero ile aynı görünmesi için kaldır */
+}#services .section-title{ text-align:center; margin:6px 0 14px; font-size:22px }
+
+/* Grid */
+.cards.compact-4{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  gap:16px;
+  align-items:stretch;
+}
+
+/* Kart (taban) */
+.card-link{ display:block; height:100% }
+.card{
+  position:relative;
+  border-radius:14px; padding:18px 16px; min-height:122px;
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)), var(--bg-panel);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 8px 18px rgba(0,0,0,.28);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease
+}
+.card:hover{ transform:translateY(-2px); box-shadow:0 12px 24px rgba(0,0,0,.30) }
+.card .card-title{ font-weight:800; font-size:16px; line-height:1.25; margin:0 0 6px; color:#EEF2FF }
+.card .card-desc{
+  color:#C5CBE3; font-size:13.5px; line-height:1.5; margin:0;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+
+/* Kart içinde hafif renk (şeffaf) */
+/* hem .is-compact hem .is-hover işlesin */
+.card.is-compact::before,
+.card.is-hover::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:var(--wash, linear-gradient(135deg, transparent, transparent));
+  opacity:.9; mix-blend-mode:normal;
+}
+.card.is-compact::after,
+.card.is-hover::after{
+  content:""; position:absolute; left:0; right:0; top:0; height:4px;
+  border-radius:12px 12px 0 0; opacity:.9;
+  background:var(--edge, linear-gradient(90deg,transparent,transparent));
+}
+.card.is-compact:hover::after,
+.card.is-hover:hover::after{ height:8px; filter:drop-shadow(0 0 10px rgba(125,211,252,.25)) }
+
+/* Varyant renkleri (şeffaf iç yıkama) */
+.card.variant-1{ --wash:linear-gradient(135deg, rgba(56,189,248,.18), rgba(147,51,234,.14)); --edge:linear-gradient(90deg,#38bdf8,#a78bfa) }
+.card.variant-2{ --wash:linear-gradient(135deg, rgba(34,197,94,.18),  rgba(56,189,248,.12)); --edge:linear-gradient(90deg,#22c55e,#38bdf8) }
+.card.variant-3{ --wash:linear-gradient(135deg, rgba(99,102,241,.18), rgba(168,85,247,.12)); --edge:linear-gradient(90deg,#6366f1,#a855f7) }
+.card.variant-4{ --wash:linear-gradient(135deg, rgba(246,195,109,.18), rgba(245,158,86,.12)); --edge:linear-gradient(90deg,#f6c36d,#f59e56) }
+.card.variant-5{ --wash:linear-gradient(135deg, rgba(243,139,184,.18), rgba(168,139,255,.12)); --edge:linear-gradient(90deg,#f38bb8,#a88bff) }
+.card.variant-6{ --wash:linear-gradient(135deg, rgba(142,161,255,.18), rgba(111,135,255,.12)); --edge:linear-gradient(90deg,#8ea1ff,#6f87ff) }
+
+/* =========================
+   Approaches (band + çizgi)
+========================= */
+.approaches-section{
+  padding-top:56px;
+  background:linear-gradient(180deg, #15103a, #110f2b);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.approach-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:28px; align-items:center }
+.approach-anim{
+  position:relative; overflow:hidden; border-radius:18px; padding:14px;
+  border:1px solid rgba(255,255,255,.10);
+  background:#0f1322; min-height:240px
+}
+@media (max-width:960px){ .approach-grid{ grid-template-columns:1fr } }
+
+.refs .section-title{ text-align:center; margin-bottom:20px }
+
+/* Duo slider */
+.refs .ref-stage-duo{
+  position:relative;
+  width:min(720px,95vw);
+  margin:16px auto 8px;
+  display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:stretch;
+}
+.refs .ref-card{
+  display:grid; place-items:center; background:#fff; border-radius:16px; overflow:hidden;
+  border:0; box-shadow:0 12px 30px rgba(0,0,0,.18);
+  padding:18px; min-height:120px; transition:transform .18s ease, box-shadow .18s ease
+}
+.refs .ref-card img{ max-height:56px; width:auto; object-fit:contain }
+.refs .ref-card:hover{ transform:translateY(-2px); box-shadow:0 18px 38px rgba(0,0,0,.24) }
+
+/* Dots */
+.ref-dots{ display:flex; gap:8px; justify-content:center; margin-top:8px }
+.ref-dots button{
+  width:8px; height:8px; border-radius:999px; border:0; background:#6670a5; opacity:.55; cursor:pointer; transition:opacity .15s,transform .15s
+}
+.ref-dots button.on{ opacity:1; transform:scale(1.1); background:#8b5cf6 }
+
+/* Nav okları */
+.refs .ref-nav{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:38px; height:38px; border-radius:12px; border:1px solid rgba(255,255,255,.18);
+  background:linear-gradient(135deg,#a855f7,#6366f1); display:grid; place-items:center;
+  cursor:pointer; box-shadow:0 12px 30px rgba(99,102,241,.25); z-index:2; color:transparent
+}
+.refs .ref-nav::after{
+  content:""; width:10px; height:10px; border-right:2px solid #fff; border-bottom:2px solid #fff;
+  transform:rotate(-45deg)
+}
+.refs .ref-nav.left{ left:-54px }
+.refs .ref-nav.right{ right:-54px }
+@media (max-width:860px){
+  .refs .ref-nav.left{ left:-8px }
+  .refs .ref-nav.right{ right:-8px }
+}
+@media (max-width:640px){
+  .refs .ref-stage-duo{ grid-template-columns:1fr 1fr; gap:10px; margin:12px auto 6px }
+  .refs .ref-card{ min-height:92px; padding:12px; border-radius:12px }
+  .refs .ref-card img{ max-height:42px }
+  .refs .ref-nav.left{ display:none!important }
+  .refs .ref-nav.right{
+    width:30px; height:30px; border-radius:50%; right:4px; top:50%; transform:translateY(-50%);
+    box-shadow:0 6px 16px rgba(99,102,241,.25)
+  }
+  .refs .ref-nav.right::after{ width:8px; height:8px }
+}
+
+/* =========================
+   Footer (mor koyu)
+========================= */
+.footer{
+  background: color-mix(in oklab, #0f1126 70%, var(--popup-bg));
+  border-top:1px solid var(--popup-line-2);
+  backdrop-filter: blur(8px);
+}.footer-grid{ display:grid; grid-template-columns:1fr minmax(340px,420px); align-items:start; gap:28px }
+.footer-links{ margin:8px 0 0; padding:0; list-style:none }
+.footer-links li{ margin:4px 0 }
+.footer-links a{ color:#cfd3ff }
+.footer-links a:hover{ color:#fff }
+.footer-bottom{ margin-top:12px; color:#9aa1d3 }
+@media (max-width:900px){ .footer-grid{ grid-template-columns:1fr } }
+
+/* Form (sağ blok) */
+.footer-right form{
+  display:flex; flex-direction:column; gap:12px;
+  background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08);
+  border-radius:16px; padding:20px; box-shadow:0 4px 20px rgba(0,0,0,0.3)
+}
+.footer-right input, .footer-right select{
+  padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,.15);
+  background:rgba(15,15,40,.9); color:#fff; font-size:14px; transition:.25s
+}
+.footer-right input:focus, .footer-right select:focus{
+  outline:none; border-color:#8b5cf6; box-shadow:0 0 6px rgba(139,92,246,.4)
+}
+.footer-right button{
+  background:linear-gradient(135deg,#6366f1,#8b5cf6); color:#fff; font-weight:600; border:0; border-radius:10px; padding:12px; transition:.3s
+}
+.footer-right button:hover{ transform:translateY(-1px); box-shadow:0 4px 12px rgba(139,92,246,.4) }
+
+/* =========================
+   WhatsApp FAB & Lead Popup
+========================= */
+.whatsapp-btn{
+  position:fixed; right:18px; bottom:18px; z-index:80; width:54px; height:54px;
+  display:grid; place-items:center; border-radius:50%; background:#25D366; color:#fff;
+  box-shadow:0 12px 28px rgba(37,211,102,.35)
+}
+.lead-popup{ position:fixed; inset:0; z-index:200; display:none; background:rgba(0,0,0,.6); align-items:center; justify-content:center }
+.lead-popup.show{ display:flex; animation:fadeIn .22s ease }
+.lead-popup .box{
+  width:min(440px,92vw); border-radius:16px; padding:22px; border:1px solid rgba(255,255,255,.1);
+  background:#13133a; box-shadow:0 30px 60px rgba(0,0,0,.45); animation:slideUp .28s ease; position:relative
+}
+.lead-popup form{ display:grid; gap:12px }
+.lead-popup input, .lead-popup button[type=submit]{
+  border-radius:10px; padding:11px 12px; border:1px solid rgba(255,255,255,.14); background:#0e0f30; color:#fff
+}
+.lead-popup button[type=submit], .lead-popup .box button{ background:linear-gradient(135deg,#a855f7,#6366f1); border:0; font-weight:700 }
+.lead-popup .close{ position:absolute; top:10px; right:12px; background:transparent; border:0; color:#cfd3ff; font-size:22px; cursor:pointer }
+@keyframes slideUp{ from{ transform:translateY(10px); opacity:0 } to{ transform:translateY(0); opacity:1 } }
+@keyframes fadeIn{ from{ opacity:0 } to{ opacity:1 } }
+/* ==========================================================
+   POPUP TEMA GENELİ — tüm siteyi popup paletine yaklaştır
+   (dosyanın EN SONUNA ekle)
+========================================================== */
+
+/* 1) Ana palet */
+:root{
+  --popup-bg:      #13133a;             /* popup kutu rengi */
+  --popup-field:   #0e0f30;             /* input arka plan */
+  --popup-line:    rgba(255,255,255,.14);
+  --popup-line-2:  rgba(255,255,255,.10);
+  --popup-grad-1:  #a855f7;             /* mor */
+  --popup-grad-2:  #6366f1;             /* mavi */
+  --popup-ink:     #e9e9ef;
+  --popup-muted:   #c6c9e9;
+}
+
+/* 2) Genel zemin ve tipografi */
+body{
+  background:
+    radial-gradient(1200px 480px at 50% -260px, rgba(168,85,247,.20), transparent 70%),
+    radial-gradient(900px 420px at 50% 120%, rgba(99,102,241,.10), transparent 70%),
+    #0f1126; /* popup'a yakın ana zemin */
+  color:var(--popup-ink);
+}
+
+/* 3) Header ve nav */
+.header{
+  background: color-mix(in oklab, #0f1126 70%, var(--popup-bg));
+  border-bottom:1px solid var(--popup-line);
+}
+.nav a{ color:#cfd3ff }
+.nav a:hover{ color:#fff }
+
+/* 4) Hero bandı */
+.hero{
+  background:
+    radial-gradient(900px 320px at 50% -220px, rgba(168,85,247,.22), transparent 70%),
+    var(--popup-bg);
+  border-bottom:1px solid var(--popup-line);
+}
+.subcopy{ color:var(--popup-muted) }
+
+/* 5) CTA ve gradientli elemanlar */
+.logo-gradient{ 
+  background:linear-gradient(135deg,var(--popup-grad-1),var(--popup-grad-2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.btn{
+  background:linear-gradient(135deg,var(--popup-grad-1),var(--popup-grad-2));
+  box-shadow:0 10px 30px rgba(99,102,241,.20);
+}
+
+/* Kart üst şeridi ve iç “wash” kapatılır */
+#services .card::before,
+#services .card::after,
+#services .card.is-compact::before,
+#services .card.is-compact::after{
+  content:none !important;
+  display:none !important;
+  background:none !important;
+  box-shadow:none !important;
+}
+
+/* Hover’da sadece hafif yükselme kalsın (renk yok) */
+#services .card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 24px rgba(0,0,0,.30);
+}
+
+/* Metin renkleri aynı kalsın (okunurluk için) */
+#services .card .card-title{ color:#EEF2FF }
+#services .card .card-desc{ color:#C5CBE3 }
+/* 7) Yaklaşımlar bandı */
+.approaches-section{
+  background: linear-gradient(180deg, #15133b, #10112e);
+  border-top:1px solid var(--popup-line-2);
+  border-bottom:1px solid var(--popup-line-2);
+}
+.approach-anim{
+  background:var(--popup-field);
+  border:1px solid var(--popup-line-2);
+}
+
+/* 9) Footer */
+.footer{
+  background:#0e0b24;
+  border-top:1px solid var(--popup-line-2);
+}
+
+/* 10) Formlar (site genelinde popup ile aynı) */
+input, select, textarea{
+  background:var(--popup-field);
+  border:1px solid var(--popup-line);
+  color:var(--popup-ink);
+}
+input:focus, select:focus, textarea:focus{
+  outline:none;
+  border-color:var(--popup-grad-1);
+  box-shadow:0 0 6px color-mix(in srgb, var(--popup-grad-1), transparent 60%);
+}
+
+/* 11) Küçük kozmetik: strip ikon kapsülleri */
+.strip-pill{
+  background:#191a3b;
+  border:1px solid var(--popup-line-2);
+}
+/* ==========================================================
+   HİZMET KARTLARI — RENK “WASH” + ÜST ŞERİTİNİ GERİ GETİR
+   (bu blok en sonda kalsın ki tüm override'ları yensin)
+========================================================== */
+
+#services .card{
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)),
+    var(--bg-panel, #12102a);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 8px 18px rgba(0,0,0,.28);
+}
+
+/* Şeffaf renk katmanı */
+#services .card::before{
+  content:"";
+  position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:var(--wash, linear-gradient(135deg, transparent, transparent));
+  opacity:.9;           /* istersen .75 yap, daha da soluk olur */
+  mix-blend-mode:normal;
+}
+
+/* İnce üst şerit */
+#services .card::after{
+  content:"";
+  position:absolute; left:0; right:0; top:0; height:4px;
+  border-radius:12px 12px 0 0; opacity:.9;
+  background:var(--edge, linear-gradient(90deg,transparent,transparent));
+  transition:height .2s ease, filter .2s ease;
+}
+#services .card:hover::after{
+  height:8px;
+  filter:drop-shadow(0 0 10px rgba(125,211,252,.25));
+}
+
+/* Varyant renkleri (yumuşak/şeffaf) */
+#services .card.variant-1{ --wash:linear-gradient(135deg, rgba(56,189,248,.18), rgba(147,51,234,.14)); --edge:linear-gradient(90deg,#38bdf8,#a78bfa) }
+#services .card.variant-2{ --wash:linear-gradient(135deg, rgba(34,197,94,.18),  rgba(56,189,248,.12)); --edge:linear-gradient(90deg,#22c55e,#38bdf8) }
+#services .card.variant-3{ --wash:linear-gradient(135deg, rgba(99,102,241,.18), rgba(168,85,247,.12)); --edge:linear-gradient(90deg,#6366f1,#a855f7) }
+#services .card.variant-4{ --wash:linear-gradient(135deg, rgba(246,195,109,.18), rgba(245,158,86,.12)); --edge:linear-gradient(90deg,#f6c36d,#f59e56) }
+#services .card.variant-5{ --wash:linear-gradient(135deg, rgba(243,139,184,.18), rgba(168,139,255,.12)); --edge:linear-gradient(90deg,#f38bb8,#a88bff) }
+#services .card.variant-6{ --wash:linear-gradient(135deg, rgba(142,161,255,.18), rgba(111,135,255,.12)); --edge:linear-gradient(90deg,#8ea1ff,#6f87ff) }
+/* ==========================================================
+   HİZMET KARTLARI — ŞEFFAF RENKLİ İÇ YIKAMA (FINAL)
+   (Bu blok en sonda kalsın)
+========================================================== */
+
+/* Kart altyapısı ve katman sırası */
+#services .cards .card{
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)),
+    var(--bg-panel, #12102a);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 8px 18px rgba(0,0,0,.28);
+}
+
+/* Metni üst katmana al */
+#services .cards .card > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* Şeffaf renk yıkaması (ALT katman) */
+#services .cards .card::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 0;                     /* metnin altında */
+  pointer-events: none;
+  background: var(--wash, linear-gradient(135deg, transparent, transparent));
+  opacity: .85;                   /* daha soluk istersen .70 yap */
+}
+
+/* Varyant renkleri (yumuşak/şeffaf) */
+#services .card.variant-1{ --wash:linear-gradient(135deg, rgba(56,189,248,.18), rgba(147,51,234,.14) 60%); --edge:linear-gradient(90deg,#38bdf8,#a78bfa) }
+#services .card.variant-2{ --wash:linear-gradient(135deg, rgba(34,197,94,.18),  rgba(56,189,248,.12) 60%); --edge:linear-gradient(90deg,#22c55e,#38bdf8) }
+#services .card.variant-3{ --wash:linear-gradient(135deg, rgba(99,102,241,.18), rgba(168,85,247,.12) 60%); --edge:linear-gradient(90deg,#6366f1,#a855f7) }
+#services .card.variant-4{ --wash:linear-gradient(135deg, rgba(246,195,109,.18), rgba(245,158,86,.12) 60%); --edge:linear-gradient(90deg,#f6c36d,#f59e56) }
+#services .card.variant-5{ --wash:linear-gradient(135deg, rgba(243,139,184,.18), rgba(168,139,255,.12) 60%); --edge:linear-gradient(90deg,#f38bb8,#a88bff) }
+#services .card.variant-6{ --wash:linear-gradient(135deg, rgba(142,161,255,.18), rgba(111,135,255,.12) 60%); --edge:linear-gradient(90deg,#8ea1ff,#6f87ff) }
+/* =========================
+   HOT-FIX: Kart içi şeffaf renk yıkaması (override)
+   (index.css'in EN SONUNA yapıştır)
+========================= */
+
+/* pseudo elementleri geri aç + katman sırası */
+#services .cards .card > * { position:relative; z-index:2 !important; }
+#services .cards .card{ position:relative; overflow:hidden; }
+
+/* ALT katman: iç renk yıkaması */
+#services .cards .card::before{
+  content:"" !important;
+  display:block !important;
+  position:absolute; inset:0; border-radius:inherit;
+  z-index:1;
+  pointer-events:none;
+  background:var(--wash, linear-gradient(135deg, transparent, transparent)) !important;
+  opacity:.85;
+}
+
+/* Varyant renkleri (şeffaf) */
+#services .card.variant-1{ --wash:linear-gradient(135deg, rgba(56,189,248,.18), rgba(147,51,234,.14) 60%); --edge:linear-gradient(90deg,#38bdf8,#a78bfa) }
+#services .card.variant-2{ --wash:linear-gradient(135deg, rgba(34,197,94,.18),  rgba(56,189,248,.12) 60%); --edge:linear-gradient(90deg,#22c55e,#38bdf8) }
+#services .card.variant-3{ --wash:linear-gradient(135deg, rgba(99,102,241,.18), rgba(168,85,247,.12) 60%); --edge:linear-gradient(90deg,#6366f1,#a855f7) }
+#services .card.variant-4{ --wash:linear-gradient(135deg, rgba(246,195,109,.18), rgba(245,158,86,.12) 60%); --edge:linear-gradient(90deg,#f6c36d,#f59e56) }
+#services .card.variant-5{ --wash:linear-gradient(135deg, rgba(243,139,184,.18), rgba(168,139,255,.12) 60%); --edge:linear-gradient(90deg,#f38bb8,#a88bff) }
+#services .card.variant-6{ --wash:linear-gradient(135deg, rgba(142,161,255,.18), rgba(111,135,255,.12) 60%); --edge:linear-gradient(90deg,#8ea1ff,#6f87ff) }
+/* === Yaklaşımlar: ayrışan arka plan + oklar === */
+
+/* Bölüm zemini: koyu slate + çok hafif grid dokusu */
+.approaches-section{
+  position: relative;
+  padding-top: 56px;
+  border-top: 1px solid color-mix(in srgb, var(--popup-line-2) 60%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--popup-line-2) 60%, transparent);
+  background:
+    radial-gradient(90% 140% at 100% -20%, rgba(99,102,241,.12), transparent 60%),
+    radial-gradient(80% 140% at -10% 120%, rgba(34,211,238,.08), transparent 60%),
+    linear-gradient(180deg,#0e1322,#0b0f1a);
+}
+
+/* Çok ince grid (neredeyse görünmez) */
+.approaches-section::before{
+  content:"";
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    linear-gradient(transparent 31px, rgba(255,255,255,.045) 32px),
+    linear-gradient(90deg, transparent 31px, rgba(255,255,255,.045) 32px);
+  background-size:32px 32px;
+  opacity:.06;
+}
+
+/* Panel (sağdaki anim konteyneri): cam panel görünümü */
+.approach-anim{
+  background: rgba(10,12,26,.72);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.03),
+    0 10px 30px rgba(0,0,0,.35);
+  backdrop-filter: blur(6px);
+}
+
+/* Ok butonları (cam kapsül) */
+.approach-controls{ display:flex; gap:10px; margin-top:12px }
+.nav-btn{
+  width:36px; height:36px; display:grid; place-items:center;
+  border-radius:12px;
+  color:#cfd3ff;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+  cursor:pointer;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+}
+.nav-btn:hover{
+  transform: translateY(-1px);
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+  border-color: rgba(255,255,255,.22);
+  box-shadow: 0 10px 26px rgba(0,0,0,.28);
+}
+.nav-btn:active{ transform: translateY(0) scale(.98) }
+.nav-btn:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99,102,241,.35);
+}
+
+/* Sağ/sol için ufak renk vurgusu (çok hafif) */
+.nav-prev{ color: color-mix(in srgb, #22d3ee 65%, #cfd3ff) }
+.nav-next{ color: color-mix(in srgb, #8b5cf6 65%, #cfd3ff) }
+/* === Yaklaşımlar: sabit metin yüksekliği === */
+.approach-copy{
+  /* Başlık ve açıklama için toplam alan; breakpoint'lere göre ayarlı */
+  margin: 8px 0 12px;
+}
+
+.approach-title{
+  font-weight:800;
+  font-size:20px;
+  --lh:1.25;
+  line-height:var(--lh);
+  /* 2 satır yer ayır: 2 * font-size * line-height */
+  min-height:calc(2 * 1em * var(--lh));
+  display:block;
+}
+
+.approach-desc{
+  color:var(--ink-muted);
+  font-size:15px;
+  --lh:1.55;
+  line-height:var(--lh);
+  /* 3 satır yer ayır */
+  min-height:calc(3 * 1em * var(--lh));
+  margin:8px 0 0;
+}
+
+@media (max-width:960px){
+  .approach-title{ font-size:18px }
+  .approach-desc{ font-size:14.5px }
+}
+
+/* === Yaklaşımlar: daha açık zemin + yumuşak doku === */
+.approaches-section{
+  position:relative;
+  padding-top:56px;
+  border-top:1px solid color-mix(in srgb, var(--popup-line-2) 55%, transparent);
+  border-bottom:1px solid color-mix(in srgb, var(--popup-line-2) 55%, transparent);
+  /* koyu-mor değil; daha nötr slate */
+  background:
+    radial-gradient(90% 140% at 100% -20%, rgba(99,102,241,.10), transparent 60%),
+    radial-gradient(80% 140% at -10% 120%, rgba(34,211,238,.08), transparent 60%),
+    linear-gradient(180deg,#141a2e,#0f1626);
+}
+
+/* çok hafif grid (öncekinden daha açık): */
+.approaches-section::before{
+  content:"";
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    linear-gradient(transparent 31px, rgba(255,255,255,.06) 32px),
+    linear-gradient(90deg, transparent 31px, rgba(255,255,255,.06) 32px);
+  background-size:32px 32px;
+  opacity:.035; /* daha açık görünüm */
+}
+
+/* Sağdaki paneli de biraz açalım */
+.approach-anim{
+  background: rgba(19, 25, 46, .78);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), 0 10px 28px rgba(0,0,0,.28);
+  backdrop-filter: blur(5px);
+}
+
+/* Oklar: cam kapsül (mevcut stilin daha açık tonu) */
+.approach-controls{ display:flex; gap:10px; margin-top:12px }
+.nav-btn{
+  width:36px; height:36px; display:grid; place-items:center;
+  border-radius:12px;
+  color:#d9ddff;
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow: 0 6px 16px rgba(0,0,0,.22);
+  cursor:pointer;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+}
+.nav-btn:hover{
+  transform: translateY(-1px);
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.07));
+  border-color: rgba(255,255,255,.26);
+  box-shadow: 0 10px 24px rgba(0,0,0,.24);
+}
+.nav-btn:focus-visible{
+  outline:none;
+  box-shadow: 0 0 0 3px rgba(99,102,241,.35);
+}
+.nav-prev{ color: color-mix(in srgb, #22d3ee 70%, #e7eaff) }
+.nav-next{ color: color-mix(in srgb, #8b5cf6 70%, #e7eaff) }
+
+/* ===== Yaklaşımlar: net başlık hiyerarşisi ===== */
+.approaches-title{
+  font-weight: 900;
+  font-size: 26px;           /* bölüm başlığı belirgin */
+  line-height: 1.2;
+  letter-spacing: -.2px;
+  margin: 0 0 10px;
+  color: #EEF2FF;
+}
+
+.approach-copy{ margin: 8px 0 12px }
+
+.approach-title{
+  font-weight: 700;          /* alt başlık (bölüm başlığından küçük) */
+  font-size: 18.5px;
+  line-height: 1.32;
+  color: #DBDFFF;
+  min-height: calc(2 * 1em * 1.32);
+}
+
+.approach-desc{
+  color: var(--ink-muted);
+  font-size: 15px;
+  line-height: 1.55;
+  min-height: calc(3 * 1em * 1.55);
+  margin: 8px 0 0;
+}
+
+/* Arka planı bir ton aç + hafif doku */
+.approaches-section{
+  position: relative;
+  background:
+    radial-gradient(90% 140% at 100% -20%, rgba(99,102,241,.10), transparent 60%),
+    radial-gradient(80% 140% at -10% 120%, rgba(34,211,238,.08), transparent 60%),
+    linear-gradient(180deg,#141a2e,#0f1626);
+}
+.approaches-section::before{
+  content:"";
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    linear-gradient(transparent 31px, rgba(255,255,255,.06) 32px),
+    linear-gradient(90deg, transparent 31px, rgba(255,255,255,.06) 32px);
+  background-size:32px 32px;
+  opacity:.035;
+}
+
+/* Oklar: siteyle uyumlu cam kapsül */
+.approach-controls{ display:flex; gap:10px; margin-top:12px }
+.nav-btn{
+  width:36px; height:36px; display:grid; place-items:center;
+  border-radius:12px;
+  color:#e5e9ff;
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow: 0 6px 16px rgba(0,0,0,.22);
+  cursor:pointer;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+}
+.nav-btn:hover{
+  transform: translateY(-1px);
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.07));
+  border-color: rgba(255,255,255,.26);
+  box-shadow: 0 10px 24px rgba(0,0,0,.24);
+}
+.nav-prev{ color: color-mix(in srgb, #22d3ee 72%, #e7eaff) }
+.nav-next{ color: color-mix(in srgb, #8b5cf6 72%, #e7eaff) }
+
+/* Sağ paneli biraz aç */
+.approach-anim{
+  background: rgba(19, 25, 46, .78);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), 0 10px 28px rgba(0,0,0,.28);
+  backdrop-filter: blur(5px);
+}
+/* === SERVICES → HERO İLE AYNI ZEMİN (FINAL OVERRIDE) === */
+#services{
+  background:
+    radial-gradient(900px 320px at 50% -220px, rgba(168,85,247,.22), transparent 70%),
+    var(--popup-bg) !important;
+  border: 1px solid var(--popup-line) !important;
+  box-shadow: none !important;
+}
+/* === REFS → YAKLAŞIMLAR İLE AYNI ZEMİN (FINAL) === */
+.refs{
+  position: relative; /* grid dokusunu yerleştirmek için */
+  padding:56px 0;
+  background:
+    radial-gradient(90% 140% at 100% -20%, rgba(99,102,241,.10), transparent 60%),
+    radial-gradient(80% 140% at -10% 120%, rgba(34,211,238,.08), transparent 60%),
+    linear-gradient(180deg,#141a2e,#0f1626) !important;
+  border-top:1px solid color-mix(in srgb, var(--popup-line-2) 55%, transparent) !important;
+  border-bottom:1px solid color-mix(in srgb, var(--popup-line-2) 55%, transparent) !important;
+}
+
+/* Yaklaşımlar’daki gibi grid dokusu (aynı değerler) */
+.refs::before{
+  content:"";
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    linear-gradient(transparent 31px, rgba(255,255,255,.06) 32px),
+    linear-gradient(90deg, transparent 31px, rgba(255,255,255,.06) 32px);
+  background-size:32px 32px;
+  opacity:.035;
+}
+/* === REFS → YAKLAŞIMLAR (INLINE #0B0F2D) İLE AYNI (FINAL OVERRIDE) === */
+.refs{
+  padding:56px 0;
+  position:relative;
+  background:#0B0F2D !important;              /* yaklaşımlar ile aynı düz zemin */
+  border-top:1px solid var(--line) !important;
+  border-bottom:1px solid var(--line) !important;
+}
+.refs::before{ display:none !important; }      /* grid dokusunu kapat */
+/* === HİZMET KARTLARI: YUMUŞAK AÇIK TON (PRO LOOK) === */
+#services .card{
+  --wash:none !important;
+  --edge:none !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)),
+    color-mix(in srgb, var(--popup-bg) 85%, #262b55 15%) !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  box-shadow:0 8px 20px rgba(0,0,0,.22) !important;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+#services .card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 26px rgba(0,0,0,.26);
+}
+#services .card::before,
+#services .card::after{
+  content:none !important;
+  display:none !important;
+}
+/* === HİZMET KARTLARI: HOVER'DA YUMUŞAK RENK PARLAMASI (PRO) === */
+#services .card{
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)),
+    color-mix(in srgb, var(--popup-bg) 85%, #262b55 15%) !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  box-shadow:0 8px 20px rgba(0,0,0,.22);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+
+/* ışıma katmanı */
+#services .card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:linear-gradient(135deg, rgba(139,92,246,.18), rgba(103,232,249,.12));
+  opacity:0;
+  transition:opacity .25s ease;
+  z-index:0;
+}
+
+/* hover’da görünür */
+#services .card:hover::before{
+  opacity:1;
+}
+
+#services .card > *{
+  position:relative;
+  z-index:1;
+}
+#services .card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 26px rgba(0,0,0,.26);
+}
+/* ===== AdsHigh • Footer form → (drop-in) ===== */
+
+/* yerleşim: brand | hizmetler | form (desktop) */
+@media (min-width:1024px){
+  .footer--brand .footer-top{
+    display:grid !important;
+    grid-template-columns: 1.05fr 1fr 0.9fr !important;
+    grid-template-areas: "brand services form" !important;
+    gap:32px !important; align-items:start !important;
+  }
+  .footer--brand .footer-left{  grid-area:brand !important; }
+  .footer--brand .footer-middle{grid-area:services !important;}
+  .footer--brand .footer-right{ grid-area:form !important; display:flex; justify-content:flex-end; }
+}
+
+/* -------- light card teması (sadece bu form kutusunda) -------- */
+.footer--brand .f-form.f-form--clean{
+  /* boyutlar */
+  width:100%; max-width: 520px !important;  /* 480–560 arası oynatabilirsin */
+  padding: 18px 18px 20px !important;
+  border-radius: 24px !important;
+
+  /* light surface */
+  --card-bg: #ffffff;
+  --card-ink:#0f1220;
+  --card-muted:#475072;
+  --card-line:#e7e9f4;
+
+  background: var(--card-bg) !important;
+  border:1px solid var(--card-line) !important;
+  box-shadow:
+    0 20px 40px rgba(17, 23, 60, .15),
+    0 2px 6px rgba(17, 23, 60, .06) !important;
+
+  color: var(--card-ink) !important;
+  display:grid !important; gap: 12px !important;
+  position:relative; isolation:isolate;   /* glow için */
+}
+
+/* mor “glow” */
+.footer--brand .f-form.f-form--clean::before{
+  content:""; position:absolute; inset:-30px -24px auto auto;
+  width: 72%; height: 72%;
+  background: radial-gradient(60% 60% at 85% 35%, rgba(139,92,246,.30), rgba(103,232,249,.18) 40%, transparent 70%);
+  filter: blur(16px);
+  z-index:-1; pointer-events:none;
+}
+
+/* başlıklar */
+.f-form--clean .f-form-head h3{
+  color:var(--card-ink) !important;
+  font-weight: 800 !important; font-size: 22px !important; letter-spacing: .1px;
+  margin: 4px 0 2px !important;
+}
+.f-form--clean .f-form-head p{
+  color:var(--card-muted) !important; font-size: 14px !important; margin:0 0 8px !important;
+}
+
+/* iki sütun düzen (ad/soyad, e-posta/telefon gibi)  */
+.f-form--clean .f-row{ display:grid; gap:10px }
+.f-form--clean .cols-2{ grid-template-columns: 1fr 1fr }
+@media (max-width: 720px){ .f-form--clean .cols-2{ grid-template-columns:1fr } }
+
+/* alanlar: pill input */
+.f-form--clean input,
+.f-form--clean select,
+.f-form--clean textarea{
+  background:#f7f8ff !important;
+  border:1px solid var(--card-line) !important;
+  color:var(--card-ink) !important;
+  height: 44px !important;
+  padding: 10px 14px !important;
+  border-radius: 999px !important;
+  font: 500 14px/1.3 Inter,system-ui !important;
+}
+.f-form--clean .phone-code{ height:44px !important; border-radius:999px !important; }
+.f-form--clean textarea{
+  min-height: 96px !important;
+  border-radius: 18px !important;     /* textarea hafif köşeli kalsın */
+  resize: vertical;
+}
+
+/* focus */
+.f-form--clean input:focus,
+.f-form--clean select:focus,
+.f-form--clean textarea:focus{
+  outline:none !important;
+  border-color:#b7bdfc !important;
+  box-shadow: 0 0 0 4px rgba(99,102,241,.18) !important;
+}
+
+/* onay + kvkk metni */
+.f-form--clean .consent{ display:flex; align-items:center; gap:10px; margin-top:2px }
+.f-form--clean .kvkk{
+  color:var(--card-muted) !important;
+  font-size: 13px !important; line-height:1.45 !important; margin-top:2px !important;
+}
+
+/* CTA: tam genişlik, büyük pill */
+.f-form--clean button[type="submit"]{
+  width:100%;
+  height: 56px !important;
+  border-radius: 999px !important;
+  font: 800 16px/1 Inter,system-ui !important;
+  border:0 !important; color:#fff !important;
+  background: linear-gradient(135deg, #6f63ff, #9b62f9) !important;
+  box-shadow: 0 16px 28px rgba(111,99,255,.25) !important;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.f-form--clean button[type="submit"]:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 20px 34px rgba(111,99,255,.30) !important;
+}
+
+/* mobil kompaktlaştırma */
+@media (max-width: 900px){
+  .footer--brand .footer-top{
+    grid-template-columns:1fr !important;
+    grid-template-areas:
+      "brand"
+      "services"
+      "form" !important;      /* nefes alanı */
+    gap:18px !important;
+  }
+  .footer--brand .f-form.f-form--clean{
+    max-width:100% !important;
+    padding:16px 14px 18px !important;
+    border-radius:22px !important;
+  }
+  .f-form--clean .f-form-head h3{ font-size:20px !important }
+  .f-form--clean .f-form-head p{ font-size:13px !important }
+  .f-form--clean input, .f-form--clean select{ height:42px !important; font-size:13.5px !important;}
+  .f-form--clean textarea{ min-height:88px !important; }
+  .f-form--clean button[type="submit"]{ height:52px !important; font-size:15px !important; }
+}
+@media (min-width:1024px){
+  /* Hizmetler-Form grid oranlarını dengeli tut */
+  .footer--brand .footer-top{
+    grid-template-columns:1.05fr 1fr 0.8fr !important;
+    align-items:start !important;
+  }
+
+  /* Form kartını küçült */
+  .footer--brand .f-form.f-form--clean{
+    max-width:340px !important;          /* formu daralt */
+    padding:12px 14px !important;        /* iç boşluk azalt */
+    border-radius:18px !important;
+    transform:translateY(-8px);          /* biraz yukarı taşı */
+    margin-bottom:-10px !important;      /* alttan hizala */
+  }
+
+  /* Alan aralıklarını daralt */
+  .f-form--clean{ gap:6px !important; }
+  .f-form--clean input,
+  .f-form--clean select{ height:32px !important; font-size:13px !important; padding:6px 10px !important; }
+  .f-form--clean .phone-code{ height:32px !important; }
+  .f-form--clean textarea{ min-height:54px !important; font-size:13px !important; padding:6px 10px !important; }
+
+  /* KVKK metni daha kısa satır aralığı */
+  .f-form--clean .kvkk{
+    font-size:12px !important;
+    line-height:1.32 !important;
+    max-width:44ch;
+    margin-top:4px !important;
+  }
+
+  /* Buton kompakt */
+  .f-form--clean button[type="submit"]{
+    height:36px !important;
+    font-size:13px !important;
+    border-radius:10px !important;
+    margin-top:4px !important;
+  }
+
+  /* Checkbox satırı sıkı */
+  .f-form--clean .consent{ gap:6px !important; margin-top:2px !important; }
+  .f-form--clean input[type="checkbox"]{ transform:scale(.9); }
+}
+/* ========== FOOTER FORM — FINAL LAYOUT (DESKTOP + MOBILE) ========== */
+
+/* Ortak ton ve input görünümü (koyu mor, düşük parlaklık) */
+.footer--brand .f-form.f-form--clean{
+  --card-surface: color-mix(in srgb, #0f1126 86%, #6f63ff 14%);
+  background: var(--card-surface) !important;
+  border: 1px solid rgba(167,139,250,.28) !important;
+  box-shadow: 0 8px 22px rgba(0,0,0,.22) !important;
+  color: #e9e9ef !important;
+}
+.f-form--clean input,
+.f-form--clean select,
+.f-form--clean textarea{
+  background: color-mix(in srgb, #0f1126 72%, #7c66f0 28%) !important;
+  border: 1px solid rgba(167,139,250,.45) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+}
+.f-form--clean input:focus,
+.f-form--clean select:focus,
+.f-form--clean textarea:focus{
+  outline: none !important;
+  border-color: #a78bfa !important;
+  box-shadow: 0 0 0 3px rgba(167,139,250,.28) !important;
+}
+
+/* -------------------- DESKTOP (>=1024px) -------------------- */
+@media (min-width:1024px){
+
+  /* Sağ sütunu genişlet; kart kısa + geniş */
+  .footer--brand .footer-top{
+    grid-template-columns: 1.05fr 1fr 1.12fr !important; /* brand | hizmetler | form */
+    align-items: start !important;
+    gap: 28px !important;
+  }
+  .footer--brand .f-form.f-form--clean{
+    max-width: 600px !important;
+    padding: 12px 14px !important;
+    border-radius: 18px !important;
+    transform: translateY(-6px);
+    margin-bottom: -8px;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;      /* 2 EŞİT kolon */
+    grid-column-gap: 10px;
+    grid-row-gap: 8px;
+  }
+
+  /* Başlık tam satır */
+  .f-form--clean .f-form-head{ grid-column: 1 / -1; margin-bottom: 2px !important; }
+
+  /* İsim & E-posta → tam eşitlik (1/2 + 1/2) */
+  .f-form--clean input[placeholder="İsim"]{ grid-column: 1 / 2; }
+  .f-form--clean input[type="email"],
+  .f-form--clean input[placeholder="E-posta"]{ grid-column: 2 / 3; }
+
+  /* Ülke kodu dar, telefon geniş (aynı satır) */
+  .f-form--clean .phone-field{
+    grid-column: 1 / -1;
+    display: grid !important;
+    grid-template-columns: 104px 1fr !important; /* kod ~104px, telefon kalan */
+    gap: 10px !important;
+    align-items: stretch !important;
+  }
+
+  /* Mesaj, onay, kvkk, buton → tam satır */
+  .f-form--clean textarea,
+  .f-form--clean .consent,
+  .f-form--clean .kvkk,
+  .f-form--clean button[type="submit"]{ grid-column: 1 / -1; }
+
+  /* Ölçüler (kısa) */
+  .f-form--clean input,
+  .f-form--clean select{ height: 34px !important; padding: 6px 10px !important; font-size: 13px !important; }
+  .f-form--clean .phone-code{ height: 34px !important; display:flex; align-items:center; }
+  .f-form--clean textarea{ min-height: 60px !important; padding: 8px 10px !important; font-size: 13px !important; }
+
+  .f-form--clean .consent{ display:flex; align-items:center; gap:8px; margin-top: 2px !important; }
+  .f-form--clean .kvkk{ font-size:12.5px !important; line-height:1.34 !important; max-width: 56ch; margin-top: 4px !important; }
+
+  .f-form--clean button[type="submit"]{
+    height: 38px !important;
+    border-radius: 12px !important;
+    font-weight: 800 !important; font-size: 14px !important;
+    background: linear-gradient(135deg,#6f63ff,#9b62f9) !important;
+    box-shadow: 0 10px 22px rgba(111,99,255,.25) !important;
+  }
+}
+
+/* -------------------- MOBILE (<=900px) -------------------- */
+@media (max-width:900px){
+
+  /* Tek sütun, nefesli ve koyu */
+  .footer--brand .footer-top{
+    grid-template-columns: 1fr !important;
+    grid-template-areas: "brand" "services" "form" !important;
+    gap: 16px !important;
+  }
+  .footer--brand .f-form.f-form--clean{
+    max-width: 100% !important;
+    padding: 12px !important;
+    border-radius: 16px !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important; /* tek sütun */
+    gap: 8px !important;
+    background: color-mix(in srgb, #0f1126 82%, #6f63ff 18%) !important; /* parlak değil */
+  }
+
+  /* Alan ölçüleri */
+  .f-form--clean input, .f-form--clean select{ height: 36px !important; padding: 7px 10px !important; font-size: 13px !important; }
+  .f-form--clean textarea{ min-height: 64px !important; font-size: 13px !important; }
+
+  /* Ülke kodu daralt, telefon geniş: mobile özel oran */
+  .f-form--clean .phone-field{
+    display: grid !important;
+    grid-template-columns: 96px 1fr !important;  /* kod 96px */
+    gap: 8px !important;
+    align-items: stretch !important;
+  }
+  .f-form--clean .phone-code{ height: 36px !important; display:flex; align-items:center; }
+
+  /* KVKK ve buton */
+  .f-form--clean .kvkk{ font-size: 12px !important; line-height: 1.35 !important; }
+  .f-form--clean button[type="submit"]{ height: 40px !important; border-radius: 12px !important; font-size: 14px !important; }
+}
+/* ===== Footer Form — color & typography polish (FINAL) ===== */
+
+/* 1) Sağ arkadaki ışıltıyı tamamen kapat */
+.footer--brand .f-form.f-form--clean::before,
+.footer--brand .f-form.f-form--clean::after,
+.footer--brand .footer-right::before{ 
+  content:none !important;
+  display:none !important;
+}
+
+/* 2) Kartın mor tonu biraz koyu, kenar çizgisi yumuşak */
+.footer--brand .f-form.f-form--clean{
+  background: color-mix(in srgb, #0f1126 88%, #6f63ff 12%) !important;
+  border: 1px solid rgba(167,139,250,.20) !important;
+  box-shadow: 0 8px 22px rgba(0,0,0,.22) !important;
+}
+
+/* 3) Başlıklar: daha küçük ve beyaz */
+.f-form--clean .f-form-head h3{
+  color:#fff !important;
+  font-size:15px !important;      /* önceki büyüklüğü küçült */
+  font-weight: 800 !important;
+  letter-spacing:.2px;
+  margin: 0 0 4px !important;
+}
+@media (max-width:900px){
+  .f-form--clean .f-form-head h3{ font-size:18px !important }
+}
+
+/* Alt başlık (Hemen Doldur…) bir ton daha açık ama agresif değil */
+.f-form--clean .f-form-head p{
+  color: #cfd3ff !important;
+}
+
+/* 4) “Onaylıyorum” satırı daha minimal */
+.f-form--clean .consent{
+  gap:8px !important;
+  margin:6px 0 0 !important;
+  font-size:13px !important;      /* küçültüldü */
+  color:#e7eaff !important;
+}
+.f-form--clean input[type="checkbox"]{
+  transform: scale(.92);
+}
+
+/* 5) Input/placeholder renkleri: kırık beyaza yakın (hizmetler listesi tonunda) */
+.f-form--clean input,
+.f-form--clean select,
+.f-form--clean textarea{
+  /* mor yüzey sabit, sadece metin ve çerçeveleri iyileştiriyoruz */
+  color:#eef2ff !important;                           /* metin: kırık beyaz */
+  border-color: rgba(167,139,250,.50) !important;     /* çerçeve: bir ton daha belirgin */
+}
+.f-form--clean input::placeholder,
+.f-form--clean textarea::placeholder{
+  color:#cfd3ff !important;                           /* hizmetler listesindeki ton */
+}
+
+/* 6) Focus: mor ama yumuşak  */
+.f-form--clean input:focus,
+.f-form--clean select:focus,
+.f-form--clean textarea:focus{
+  border-color:#a78bfa !important;
+  box-shadow:0 0 0 3px rgba(167,139,250,.24) !important;
+}
+
+/* 7) Telefon satırı oranları – kod daha dar, telefon geniş */
+@media (min-width:1024px){
+  .f-form--clean .phone-field{
+    grid-template-columns: 96px 1fr !important;  /* 96–104 arası oynatabilirsin */
+  }
+}
+@media (max-width:900px){
+  .f-form--clean .phone-field{
+    grid-template-columns: 92px 1fr !important;
+  }
+}
+/* ===== Footer layout tweaks — center Services (desktop), reorder (mobile) ===== */
+
+/* Desktop: 3 sütun + Hizmetler'i dikey ortala */
+@media (min-width:1024px){
+  .footer--brand .footer-top{
+    display:grid !important;
+    grid-template-columns: 1.05fr 1fr 1.12fr !important; /* brand | services | form */
+    grid-template-areas: "brand services form" !important;
+    gap:28px !important;
+    align-items:start !important;
+  }
+  .footer--brand .footer-left{  grid-area:brand !important; align-self:start; }
+  .footer--brand .footer-middle{grid-area:services !important; align-self:center !important;} /* ← tam ortaya */
+  .footer--brand .footer-right{ grid-area:form !important;   align-self:start; justify-self:end; }
+}
+
+/* Mobile: önce FORM, sonra AdsHigh, en son Hizmetler */
+@media (max-width:900px){
+  .footer--brand .footer-top{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    grid-template-areas:
+      "form"
+      "brand"
+      "services" !important;
+    gap:16px !important;
+  }
+  .footer--brand .footer-right{ grid-area:form !important; }
+  .footer--brand .footer-left{  grid-area:brand !important; }
+  .footer--brand .footer-middle{grid-area:services !important; }
+
+  /* KVKK: tek parça, tam görünür (daha küçük ve okunaklı) */
+  .f-form--clean .kvkk{
+    display:block !important;
+    -webkit-line-clamp: unset !important;
+    -webkit-box-orient: initial !important;
+    overflow: visible !important;
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+    opacity: .95;
+    margin-top: 6px !important;
+  }
+}
+/* ===== 1) KVKK SIRALAMA ve KONUM DÜZELTMESİ ===== */
+/* Her zaman formun içinde, consent'ten sonra, butondan önce */
+.f-form--clean{
+  display: grid !important;               /* zaten grid ise aynen kalır */
+  grid-auto-flow: row;
+}
+.f-form--clean .f-form-head{ order: 0 }
+.f-form--clean input[placeholder="İsim"]{ order: 10 }
+.f-form--clean input[type="email"],
+.f-form--clean input[placeholder="E-posta"]{ order: 12 }
+.f-form--clean .phone-field{ order: 14 }
+.f-form--clean textarea{ order: 16 }
+.f-form--clean .consent{ order: 18 }
+
+/* KVKK – daima consent'in altında, butondan önce */
+.f-form--clean .kvkk{
+  order: 20 !important;
+  grid-column: 1 / -1 !important;
+  position: static !important;
+  display: block !important;
+  -webkit-line-clamp: unset !important;
+  -webkit-box-orient: initial !important;
+  overflow: visible !important;
+  margin-top: 6px !important;
+  font-size: 12.5px !important;
+  line-height: 1.45 !important;
+  color: #cfd3ff !important;
+}
+
+/* Button en sonda */
+.f-form--clean button[type="submit"]{ order: 30 }
+
+/* ===== 2) HİZMETLER SÜTUNUNU DİKEY ORTALA (DESKTOP) ===== */
+@media (min-width:1024px){
+  .footer--brand .footer-top{
+    display:grid !important;
+    grid-template-columns: 1.05fr 1fr 1.12fr !important;  /* brand | services | form */
+    grid-template-areas: "brand services form" !important;
+    gap:28px !important;
+    align-items: start !important;        /* satır genelinde start */
+  }
+  /* alanlar gride sabitlenir */
+  .footer--brand .footer-left{  grid-area: brand !important; align-self: start !important; }
+  .footer--brand .footer-right{ grid-area: form   !important; align-self: start !important; justify-self: end !important; }
+
+  /* Hizmetler tam ortada (yüksekliği forma göre ortala) */
+  .footer--brand .footer-top .footer-middle{
+    grid-area: services !important;
+    align-self: center !important;        /* ← dikey merkez */
+  }
+}
+
+/* ===== 3) MOBİL SIRALAMA: ÖNCE FORM, SONRA AdsHigh, EN SON HİZMETLER ===== */
+@media (max-width:900px){
+  .footer--brand .footer-top{
+    display:grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "form"
+      "brand"
+      "services" !important;
+    gap:16px !important;
+  }
+  .footer--brand .footer-right{ grid-area: form !important; }
+  .footer--brand .footer-left{  grid-area: brand !important; }
+  .footer--brand .footer-middle{grid-area: services !important; }
+}
+/* ==== FOOTER — Hizmetler'i tam ortaya al (desktop) ==== */
+@media (min-width:1024px){
+  .footer--brand .footer-top{
+    display:grid !important;
+    grid-template-columns: 1.05fr 1fr 1.12fr !important; /* brand | services | form */
+    gap:28px !important;
+    align-items:start !important; /* satır yüksekliği formdan gelsin */
+  }
+
+  /* Formdaki küçük yukarı kaydırmayı kaldır — referans hizayı bozmasın */
+  .footer--brand .f-form.f-form--clean{
+    transform:none !important;
+    margin-bottom:0 !important;
+  }
+
+  /* Hizmetler blok: sadece içerik yüksekliği + dikey auto margin ile tam merkez */
+  .footer--brand .footer-middle{
+    height:fit-content !important;       /* yayılmasın */
+    align-self:center !important;        /* grid track içinde ortala */
+    margin-block:auto !important;        /* safe: üst-alt otomatik */
+  }
+
+  /* Olası ekstra üst/alt boşlukları sıfırla */
+  .footer--brand .footer-middle .section-title{ margin-top:0 !important }
+}
+/* === Hizmetler sütununu gerçek anlamda dikey ortala (desktop) === */
+@media (min-width:1024px){
+  .footer--brand .footer-top .footer-middle{
+    /* grid item satır yüksekliğini kaplasın */
+    align-self: stretch !important;
+
+    /* içerik, bu yüksekliğin içinde dikey ortalansın */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
+  /* olası üst/alt boşluk sapmalarını temizle */
+  .footer--brand .footer-top .footer-middle > :first-child{ margin-top:0 !important; }
+  .footer--brand .footer-top .footer-middle > :last-child{  margin-bottom:0 !important; }
+}
+
+/* ====== FOOTER • DESKTOP ORTA HİZALAMA — FINAL OVERRIDE ====== */
+@media (min-width:1024px){
+  .footer.footer--brand .footer-top{
+    display: grid !important;
+    grid-template-columns: 1.05fr 1fr 1.12fr !important;
+    grid-template-areas: "brand services form" !important;
+    align-items: stretch !important;   /* satır yüksekliği formdan gelsin */
+    gap: 28px !important;
+  }
+
+  /* formdaki micro offset'leri kapat ki yükseklik referansı şaşmasın */
+  .footer.footer--brand .f-form.f-form--clean{
+    transform: none !important;
+    margin: 0 !important;
+  }
+
+  /* hizmetler blok: kendi satırını tamamen kaplasın ve içerik dikey ortalansın */
+  .footer.footer--brand .footer-middle{
+    grid-area: services !important;
+    align-self: stretch !important;      /* satır yüksekliğini kapla */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;  /* içerikleri dikey ortala */
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .footer.footer--brand .footer-left{  grid-area: brand !important;  align-self: start !important; }
+  .footer.footer--brand .footer-right{ grid-area: form  !important;  align-self: start !important; justify-self: end !important; }
+}
+/* ====== FOOTER • MOBİL SIRALAMA — FINAL OVERRIDE ====== */
+@media (max-width:900px){
+  .footer.footer--brand .footer-top{
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "form"
+      "brand"
+      "services" !important;
+    gap: 16px !important;
+  }
+  .footer.footer--brand .footer-right { grid-area: form     !important; }
+  .footer.footer--brand .footer-left  { grid-area: brand    !important; }
+  .footer.footer--brand .footer-middle{ grid-area: services !important; }
+}
+
+/* KVKK her zaman consent'in ALTINDA ve butondan ÖNCE */
+.f-form--clean{
+  display: grid !important;
+  grid-auto-flow: row;
+}
+.f-form--clean .consent{ order: 18 !important; }
+.f-form--clean .kvkk{
+  order: 20 !important;
+  grid-column: 1 / -1 !important;
+  position: static !important;
+  display: block !important;
+  -webkit-line-clamp: unset !important;
+  overflow: visible !important;
+}
+.f-form--clean button[type="submit"]{ order: 30 !important; }
+
+/* ====== TELEFON SATIRI ORAN — FINAL ====== */
+@media (min-width:1024px){
+  .f-form--clean .phone-field{
+    display: grid !important;
+    grid-template-columns: 96px 1fr !important; /* kod kısa, telefon geniş */
+    gap: 10px !important;
+    align-items: stretch !important;
+  }
+}
+@media (max-width:900px){
+  .f-form--clean .phone-field{
+    display: grid !important;
+    grid-template-columns: 92px 1fr !important;
+    gap: 8px !important;
+  }
+}
+.footer-bottom__inner.two-line {
+  display: flex;
+  flex-direction: column;   /* alt alta getirir */
+  align-items: center;      /* ortalar */
+  gap: 2px;                 /* satırlar arası mesafe */
+  white-space: normal;      /* artık kırılmasına izin veriyoruz */
+  text-align: center;
+}
+
+.footer--brand .footer-bottom{
+  padding: 50px 0 0;
+  color: var(--f-muted);
+  font-size: 13px;
+}
+.ai-credit {
+  background: linear-gradient(90deg,#a78bfa,#2e555a,#7345ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  background-size: 200%;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% }
+  100% { background-position: 200% }
+}
+
+.ai-credit {
+  background: linear-gradient(90deg, #a78bfa, #6d3a58,#7345ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  background-size: 200%;
+  animation: shimmer 12s linear infinite; /* ← 10 saniye = çok daha yavaş */
+}
+/* Yaklaşımlar sahnesi: her SVG 16:9 alanı doldursun ve taşmasın */
+.ap-canvas{
+  width: 100%;
+  max-width: 920px;            /* sağ kartın genişliği */
+  aspect-ratio: 16 / 9;
+  margin-inline: auto;
+}
+.ap-canvas svg{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ==== Yaklaşımlar (mobil uyumlu panel ayarları) ==== */
+.ap-canvas{
+  width: min(760px, 92vw);
+  aspect-ratio: 2 / 1;
+  margin-inline: auto;
+  overflow: hidden;
+  display: block;
+}
+.ap-canvas svg{ width:100%; height:100%; display:block; }
+
+@media (max-width: 900px){
+  .approach-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+  .ap-canvas{
+    width: 90vw;
+    max-width: 520px;
+    margin: 0 auto;
+    aspect-ratio: 4 / 3;
+    border-radius: 24px;
+  }
+}
+
+@media (max-width: 600px){
+  .ap-canvas{
+    width: 88vw;
+    max-width: 460px;
+    aspect-ratio: 5 / 4;
+  }
+}
+/* ====== APPROACH CANVAS — FINAL SIZING (smaller on mobile) ====== */
+.approach-grid{
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 24px;
+  align-items: center;
+}
+
+/* Desktop: daha yatay, biraz daha küçük */
+.ap-canvas{
+  width: min(700px, 90vw);
+  aspect-ratio: 2.2 / 1;      /* önceki 2:1 ve 16:9’dan daha yatay ⇒ daha kısa */
+  margin-inline: auto;
+  overflow: hidden;
+  display: block;
+}
+
+/* Tablet ve altı: kenarlara nefes alanı */
+@media (max-width: 900px){
+  .approach-grid{ grid-template-columns: 1fr; gap: 18px; }
+  .ap-canvas{
+    width: 86vw;              /* 90 → 86: sahnenin çevresi görünür */
+    max-width: none;
+    aspect-ratio: 4 / 3;      /* öncekiyle aynı ama daha dar genişlik */
+    margin: 0 auto;
+  }
+}
+
+/* Küçük mobil: biraz daha küçült */
+@media (max-width: 600px){
+  .ap-canvas{
+    width: 84vw;              /* 88 → 84 */
+    aspect-ratio: 5 / 4;      /* mevcutla aynı; yükseklik dengeli */
+  }
+}
+
+/* Panel kutusunu da ufakçe sıkılaştır (daha kompakt görünüm) */
+.approach-anim{
+  padding: 10px !important;   /* 14 → 10 */
+  border-radius: 16px !important;
+  background: rgba(19,25,46,.78) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), 0 10px 24px rgba(0,0,0,.26) !important;
+}
+
+/* ====== LOGO SIZES — CONSOLIDATED ====== */
+.header .site-logo .logo-img{ height: 40px; width:auto; }
+@media (max-width: 960px){
+  .header .site-logo .logo-img{ height: 30px; }  /* mobilde gerçekten küçülsün */
+}
+.footer .site-logo .logo-img{ height: 36px; width:auto; }
+@media (max-width: 900px){
+  .footer .site-logo .logo-img{ height: 34px; }
+}
+
+/* Typo fix: herhangi bir yerdeki “42tpx” hatasını ez */
+.footer .site-logo .logo-img{ height: 42px; }
+/* ====== YAKLAŞIMLAR — DESKTOP SHRINK (final) ====== */
+@media (min-width: 1024px){
+  /* Sağdaki canvas’ı küçült */
+  .approach-anim.ap-canvas{
+    width: clamp(480px, 36vw, 600px) !important; /* min 480, ideal ~36vw, max 600 */
+    aspect-ratio: 2.1 / 1 !important;            /* biraz daha yatay → daha kısa görünür */
+  }
+
+  /* Grid oranını da hafif sola kaydır (metne daha fazla alan) */
+  .approach-grid{
+    grid-template-columns: 1.2fr 0.8fr !important;
+    gap: 24px !important;
+    align-items: center !important;
+  }
+
+  /* Panelin dış boşluğunu biraz sıkılaştır */
+  .approach-anim{
+    padding: 10px !important;
+    border-radius: 16px !important;
+  }
+}
+
+/* Çok geniş ekranlarda daha da küçük tut (opsiyonel) */
+@media (min-width: 1440px){
+  .approach-anim.ap-canvas{
+    width: 560px !important;
+  }
+}
+/* ====== DENEYİM ODAKLI MARKA YAKLAŞIMI — HİZALAMA FIX (final) ====== */
+.approach-anim[data-approach="deneyim"] svg{
+  display: block;
+  margin: 0 auto;
+  transform: translateY(-2px);          /* dikeyte hafif yukarı al */
+}
+
+.approach-anim[data-approach="deneyim"]{
+  padding-inline: 20px !important;      /* soldan-sağdan dengele */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* mobilde bu kadar sıkma — padding'i biraz aç */
+@media (max-width:900px){
+  .approach-anim[data-approach="deneyim"]{
+    padding-inline: 14px !important;
+  }
+}
+:root{ --header-h: 72px; }
+.header { position: fixed; inset: 0 0 auto 0; height: var(--header-h); z-index: 1000; transition: background .2s ease, box-shadow .2s ease; background: rgba(11,15,45,.88); backdrop-filter: blur(8px); }
+.header.scrolled { background: rgba(11,15,45,.72); box-shadow: 0 6px 18px rgba(0,0,0,.18); }
+.header-offset { height: calc(var(--header-h) + 8px); }
+.nav.center-nav .has-dd { position: relative; }
+.dd { position: absolute; top: 100%; left: 0; min-width: 220px; background:#0F1426; border:1px solid rgba(255,255,255,.08);
+     border-radius: 10px; box-shadow: 0 14px 40px rgba(0,0,0,.28); padding:8px; opacity:0; transform: translateY(6px);
+     pointer-events:none; transition: opacity .16s ease, transform .16s ease; z-index: 999; }
+.dd.show { opacity:1; transform: translateY(0); pointer-events:auto; }
+.dd-list { list-style:none; margin:0; padding:0; }
+.dd-link { display:block; padding:8px 10px; border-radius:8px; color:#cfd4ff; }
+.dd-link:hover { background: rgba(124,58,237,.14); color:#fff; }
+@media (max-width:960px){ .dd{ left:50%; transform:translate(-50%,6px); } .dd.show{ transform:translate(-50%,0); } }
+.ref-stage-duo{ position:relative; }
+.ref-nav{ position:absolute; top:50%; transform:translateY(-50%); width:38px; height:38px; border-radius:10px;
+  background:rgba(15,20,38,.9); border:1px solid rgba(255,255,255,.12); box-shadow:0 8px 24px rgba(0,0,0,.3);
+  z-index: 5; cursor:pointer; }
+.ref-nav.left{ left:-6px; }
+.ref-nav.right{ right:-6px; }
+.ref-nav:hover{ background:#151c3e; }
+/* 1) Aynı arka plan (yaklaşımlar + hizmetler) */
+.section--deep{
+  background:
+    radial-gradient(900px 320px at 50% -220px, rgba(124,58,237,.25), transparent 70%),
+    var(--bg-hero, #0B0F2D);
+}
+
+/* 2) Header dropdown (mobil/desktop) */
+.nav-item.has-dd{ position:relative }
+.dd{ position:absolute; left:0; top:100%; transform:translateY(8px); opacity:0; pointer-events:none; transition:opacity .18s ease, transform .18s ease; z-index:30 }
+.dd.show{ opacity:1; transform:translateY(4px); pointer-events:auto }
+.dd-services{ min-width:240px; background:#0F1426; border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:8px; box-shadow:0 12px 30px rgba(0,0,0,.35) }
+.dd-services .dd-list{ list-style:none; margin:0; padding:0; max-height:70vh; overflow:auto }
+.dd-services .dd-link{
+  display:block; padding:10px 12px; border-radius:10px; color:#dfe3ff; font-weight:600; white-space:nowrap;
+}
+.dd-services .dd-link:hover{ background:rgba(255,255,255,.06); color:#fff }
+
+/* Mobil: menüyü ekran genişliğine sabitle (taşma olmasın) */
+@media (max-width:960px){
+  .center-nav{ position:relative; }
+  .dd-services{ left:0; right:auto; width:min(92vw, 360px) }
+}
+
+/* 3) Hizmet kartları hover efekti */
+.card-link .card{
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.card-link:hover .card{
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(18, 24, 48, .45), inset 0 0 0 1px rgba(255,255,255,.06);
+  background: radial-gradient(280px 120px at 20% -30%, rgba(124,58,237,.16), transparent 60%), var(--card-bg, transparent);
+}
+
+/* 4) Referans oklarıyla aynı buton stili */
+.ref-stage-duo .ref-nav{
+  width:38px; height:38px; border-radius:12px; border:1px solid rgba(255,255,255,.10);
+  background:#151933; box-shadow:0 8px 26px rgba(59, 41, 120, .35);
+}
+.ref-stage-duo .ref-nav:hover{ filter:brightness(1.08) }
+.ref-stage-duo .ref-nav.left::before,
+.ref-stage-duo .ref-nav.right::before{
+  content:""; display:block; width:12px; height:12px; border:2px solid #cfd4ff; border-top:none; border-right:none; transform:rotate(45deg); margin: auto;
+}
+.ref-stage-duo .ref-nav.right::before{ transform:rotate(-135deg) }
+/* === BAND BG — Hizmetler + Yaklaşımlar aynı zemin (FINAL) === */
+:root{ --band-bg:
+  radial-gradient(900px 320px at 50% -220px, rgba(168,85,247,.22), transparent 70%),
+  var(--popup-bg) }
+
+#services,
+.approaches-section{
+  background: var(--band-bg) !important;
+  border-top: 1px solid var(--popup-line) !important;
+  border-bottom: 1px solid var(--popup-line) !important;
+  box-shadow: none !important;
+}
+
+/* Yaklaşımlar’da önceki grid dokusunu tamamen kapat */
+.approaches-section::before{ display:none !important; }
+/* === MOBİL NAV — Hizmetler görünür + tıklanabilir (FINAL) === */
+@media (max-width:960px){
+  .center-nav{
+    display:flex !important;          /* gizlemeyi boz */
+    gap:14px;
+    align-items:center;
+  }
+  .nav{ gap:14px; }
+  .nav .has-dd > a{ pointer-events:auto }   /* tık çalışsın */
+  .dd{ left:50% !important; transform:translate(-50%,6px) !important; }
+  .dd.show{ transform:translate(-50%,0) !important; }
+}
+/* === REFS OKLARI — Yaklaşımlar’daki nav-btn ile aynı (FINAL) === */
+.refs .ref-stage-duo .ref-nav{
+  width:36px !important; height:36px !important; border-radius:12px !important;
+  display:grid !important; place-items:center !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05)) !important;
+  border:1px solid rgba(255,255,255,.18) !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,.22) !important;
+  cursor:pointer; color:transparent;
+}
+.refs .ref-stage-duo .ref-nav:hover{
+  transform: translateY(-1px);
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.07)) !important;
+  border-color: rgba(255,255,255,.26) !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,.24) !important;
+}
+.refs .ref-stage-duo .ref-nav::after{
+  content:""; width:10px; height:10px; border-right:2px solid #e5e9ff; border-bottom:2px solid #e5e9ff; transform:rotate(-45deg);
+}
+.refs .ref-stage-duo .ref-nav.left::after{ transform:rotate(135deg); }
+/* Hizmet kartı hover pekiştirme */
+#services .card{
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease !important;
+}
+#services .card:hover{
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 26px rgba(0,0,0,.26) !important;
+  background:
+    radial-gradient(280px 120px at 20% -30%, rgba(124,58,237,.16), transparent 60%),
+    color-mix(in srgb, var(--popup-bg) 85%, #262b55 15%) !important;
+}
+/* =============== 1) REFS OKLARI — Yaklaşımlar oklarıyla birebir =============== */
+.refs .ref-stage-duo .ref-nav{
+  width:36px !important; height:36px !important; border-radius:12px !important;
+  display:grid !important; place-items:center !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05)) !important;
+  border:1px solid rgba(255,255,255,.18) !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,.22) !important;
+  cursor:pointer;
+}
+.refs .ref-stage-duo .ref-nav:hover{
+  transform: translateY(-1px);
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.07)) !important;
+  border-color: rgba(255,255,255,.26) !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,.24) !important;
+}
+.refs .ref-stage-duo .ref-nav::after{
+  content:""; width:10px; height:10px;
+  border-right:2px solid #e5e9ff; border-bottom:2px solid #e5e9ff;
+  transform:rotate(-45deg);
+}
+.refs .ref-stage-duo .ref-nav.left::after{ transform:rotate(135deg); }
+
+/* =============== 2) HİZMETLER & YAKLAŞIMLAR — aynı arka plan =============== */
+:root{
+  --band-bg:
+    radial-gradient(900px 320px at 50% -220px, rgba(168,85,247,.22), transparent 70%),
+    var(--popup-bg);
+}
+#services,
+.approaches-section{
+  background: var(--band-bg) !important;
+  border-top: 1px solid var(--popup-line) !important;
+  border-bottom: 1px solid var(--popup-line) !important;
+  box-shadow: none !important;
+}
+/* #services içindeki “akan ikon” şeridinin ek gölgesini kapat */
+#services .brand-strip,
+#services .strip-rail{
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* =============== 3) MOBİL NAV — sadece Hizmetler kalsın; dropdown yok =============== */
+@media (max-width:960px){
+  /* Yaklaşımlar linkini mobilde tamamen gizle */
+  .center-nav a[href*="approaches"]{ display:none !important; }
+
+  /* Hizmetler menüsünü göster ama dropdown’ı kapat (tıklayınca kaydıracağız) */
+  .dd.dd-services{ display:none !important; }
+}
+
+/* =============== 4) MOBİL FOOTER FORM — mesaj kutusunu kaldır + kompakt =============== */
+@media (max-width:900px){
+  .f-form--clean .msg{ display:none !important; }   /* textarea className="msg" */
+  .footer--brand .f-form.f-form--clean{
+    padding: 10px 12px !important;
+    gap: 6px !important;
+  }
+  .f-form--clean input, .f-form--clean select{ height: 34px !important; }
+  .f-form--clean button[type="submit"]{ height: 40px !important; }
+}
+
+/* =============== 5) HEADER LOGO — biraz daha büyük =============== */
+.header .site-logo .logo-img{ height: 46px !important; width:auto; }
+@media (max-width:960px){
+  .header .site-logo .logo-img{ height: 40px !important; }
+}
+
+/* REFS arrows → Yaklaşımlar okları ile aynı */
+.refs .ref-nav{
+  width:36px !important; height:36px !important;
+  border-radius:12px !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05)) !important;
+  border:1px solid rgba(255,255,255,.18) !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,.22) !important;
+  display:grid !important; place-items:center !important;
+}
+.refs .ref-nav::before,
+.refs .ref-nav::after{ content:none !important; }  /* eski zigzag’ı kapat */
+
+.refs .ref-nav > i,
+.refs .ref-nav .chev{ display:block; width:12px; height:12px; border:2px solid #e5e9ff;
+  border-top:none; border-right:none; transform:rotate(45deg); }
+.refs .ref-nav.left  { left:-8px !important; }
+.refs .ref-nav.right { right:-8px !important; }
+.refs .ref-nav.right .chev{ transform:rotate(-135deg); }
+
+/* HTML tarafında pseudo yerine gerçek eleman gerekiyorsa: */
+.refs .ref-nav:empty::after{ content:"" } /* güvenlik; boş kalırsa görünmez olmasın */
+/* Yaklaşımlar panelinde içeriği kusursuz ortala */
+.approach-anim{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.approach-anim svg{
+  width:100%;
+  height:100%;
+  max-width: 640px;   /* taşma olmasın */
+  display:block;
+}
+/* === HİZMETLER: içteki yuvarlak/ikinci paneli tamamen kaldır === */
+#services.section.deep,
+#services .container {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+}
+
+/* pseudo-element ile çizilen iç çerçeveleri kapat */
+#services::before,
+#services::after,
+#services .container::before,
+#services .container::after {
+  content: none !important;
+}
+
+/* marka şeridi ve kart grid de tek kat görünsün */
+#services .brand-strip,
+#services .brand-strip .container,
+#services .cards {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* bölüm zemini sitenin band rengiyle devam etsin */
+#services {
+  background: var(--band-bg) !important;   /* mevcut paletteki koyu zemin */
+  border-top: 1px solid var(--popup-line);
+  border-bottom: 1px solid var(--popup-line);
+}
+/* === Yaklaşımlarımız (mobil hizalama) === */
+@media (max-width: 900px) {
+  #approaches .section-title,
+  #approaches .approach-title,
+  #approaches .approach-desc {
+    text-align: center !important;
+  }
+
+  #approaches .approach-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #approaches .approach-controls {
+    justify-content: center;
+  }
+}
+/* === HERO (mobil düzenleme) === */
+@media (max-width: 900px) {
+  .hero .headline {
+    font-size: 6vw;          /* başlık boyutu küçülür */
+    white-space: nowrap;     /* tek satırda kalır */
+    text-align: center;      /* ortalanır */
+    line-height: 1.1;
+  }
+
+  .hero .subcopy {
+    font-size: 14px;         /* açıklama biraz küçülür */
+    line-height: 1.4;        /* daha sıkı ama okunaklı */
+    text-align: center;
+    max-width: 90%;          /* kenarlara çarpmasın */
+    margin: 10px auto 0;
+  }
+}

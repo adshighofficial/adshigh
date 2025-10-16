@@ -1,0 +1,132 @@
+
+/* ServiceDetailLite â€“ non-destructive overrides
+   Drop-in: import this file in ServiceDetailLite.jsx or index.css
+   Scope-limited to .servicedetaillite so other pages are safe.
+*/
+
+.servicedetaillite {
+  --hd-max: 72ch;
+  --copy-max: 68ch;
+  --card-title-max: 26ch;
+}
+
+/* 1) Headings centered; prefer single-line with balance */
+.servicedetaillite h1,
+.servicedetaillite h2,
+.servicedetaillite .section-title {
+  text-align: center;
+  margin-inline: auto;
+  max-width: var(--hd-max);
+  line-height: 1.15;
+  text-wrap: balance;
+  word-break: keep-all;
+}
+.servicedetaillite h1,
+.servicedetaillite .section-title.lg,
+.servicedetaillite .hero-title {
+  font-size: clamp(24px, 3.6vw, 40px);
+}
+.servicedetaillite h2 { font-size: clamp(20px, 3.1vw, 32px); }
+
+/* 2) Paragraphs centered, readable measure */
+.servicedetaillite p,
+.servicedetaillite .lead,
+.servicedetaillite .section-desc,
+.servicedetaillite .desc {
+  text-align: center;
+  margin-inline: auto;
+  max-width: var(--copy-max);
+  line-height: 1.6;
+}
+
+/* 3) Strategy / feature card titles always centered and wrap nicely */
+.servicedetaillite .strategy-grid .card h3,
+.servicedetaillite .cards .card h3,
+.servicedetaillite .feature-cards .card h3,
+.servicedetaillite .grid .card h3 {
+  text-align: center;
+  margin-inline: auto;
+  inline-size: 100%;
+  max-width: var(--card-title-max);
+  word-break: break-word;
+  hyphens: auto;
+  text-wrap: balance;
+  font-size: clamp(14px, 2.6vw, 18px);
+  line-height: 1.25;
+}
+.servicedetaillite .strategy-grid .card .card-body,
+.servicedetaillite .cards .card .card-body,
+.servicedetaillite .feature-cards .card .card-body,
+.servicedetaillite .grid .card .card-body {
+  text-align: center;
+}
+
+/* 4) Section spacing */
+.servicedetaillite .section-title + .section-desc { margin-top: 8px; }
+.servicedetaillite .section { margin-block: clamp(24px, 6vw, 64px); }
+
+/* 5) Mobile tuning */
+@media (max-width: 900px) {
+  .servicedetaillite { --hd-max: 64ch; --copy-max: 62ch; }
+}
+@media (max-width: 720px) {
+  .servicedetaillite h1,
+  .servicedetaillite .section-title.lg,
+  .servicedetaillite .hero-title { font-size: clamp(22px, 6vw, 30px); }
+  .servicedetaillite h2 { font-size: clamp(18px, 5vw, 26px); }
+  .servicedetaillite p,
+  .servicedetaillite .lead,
+  .servicedetaillite .section-desc,
+  .servicedetaillite .desc { font-size: clamp(13px, 3.6vw, 16px); }
+}
+
+/* === Your 5 requests === */
+
+/* (1) SÃ¼reÃ§ butonu tamamen kaldÄ±r */
+.servicedetaillite .btn-process,
+.servicedetaillite [data-role="process-btn"] {
+  display: none !important;
+}
+
+/* (1) â€œDanÄ±ÅŸmanlÄ±k Alâ€ yerine â€œBilgi Alâ€ â€“ CSS-only fallback
+   Not: Ä°Ã§erik deÄŸiÅŸikliÄŸi iÃ§in ideal yol JSX'te metni deÄŸiÅŸtirmektir.
+   Burada eriÅŸilebilirlik korunamayabilir, ama gÃ¶rsel olarak uygulanÄ±r.
+   Hedef: sayfadaki ilk birincil CTA */
+.servicedetaillite .hero .btn-primary,
+.servicedetaillite .section .btn-primary,
+.servicedetaillite .cta-primary {
+  position: relative;
+}
+/* metni gÃ¶rÃ¼nmez yapÄ±p gÃ¶rsel iÃ§erik ekle */
+.servicedetaillite .hero .btn-primary,
+.servicedetaillite .section .btn-primary,
+.servicedetaillite .cta-primary {
+  color: transparent !important;
+}
+.servicedetaillite .hero .btn-primary::after,
+.servicedetaillite .section .btn-primary::after,
+.servicedetaillite .cta-primary::after {
+  content: "Bilgi Al";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+
+/* (2) Stratejimiz kart baÅŸlÄ±klarÄ± zaten yukarÄ±da ortalanÄ±yor. */
+
+/* (3) ve (5): baÅŸlÄ±k taÅŸarsa Ã§ok az kÃ¼Ã§Ã¼lt; aÃ§Ä±klama paragraflarÄ± aralÄ±klÄ± */
+.servicedetaillite .section .section-title,
+.servicedetaillite .block .section-title {
+  letter-spacing: .1px;
+}
+.servicedetaillite .section .section-desc p + p,
+.servicedetaillite .block .section-desc p + p {
+  margin-top: .7em;
+}
+
+/* (4) 4. alan: baÅŸlÄ±k orta, aÃ§Ä±klama sola (kapsayÄ±cÄ± sÄ±nÄ±fÄ± tahmini) */
+.servicedetaillite .sec-4 .section-title { text-align: center; }
+.servicedetaillite .sec-4 .section-desc { text-align: left; margin-inline: 0; }
+/* EÄŸer farklÄ±ysa sÄ±nÄ±fÄ± gÃ¼ncelleyin: Ã¶r. .measurement, .advantages */
