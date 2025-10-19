@@ -273,12 +273,13 @@ function SiteFooter({ lang, TXT }) {
           </ul>
         </div>
 
-{/* Form (Footer/İletişim) - GÜNCELLENMİŞ VE EKSİKSİZ KOD */}
+{/* Form (Footer/İletişim) - KESİN KOD */}
         <form
           className="fcol f-form f-form--clean"
-          // Form verisini Formspree'ye gönderir. URL'nizi buraya yapıştırın.
+          // Formspree'ye veri göndermek için gerekli ayarlar
           action="https://formspree.io/f/xyznvdwn" 
           method="POST"
+          // NOT: onSubmit event'i KALDIRILDI
         >
           <div className="f-form-head">
             <h3>İLETİŞİM FORMU</h3>
@@ -287,7 +288,7 @@ function SiteFooter({ lang, TXT }) {
 
           <input placeholder="İsim" required name="ad_soyad" /> 
           <input type="email" placeholder="E-posta" required name="_replyto" /> 
-
+          
           <div className="phone-field">
             <select className="phone-code" name="ulke_kodu" defaultValue="+90" aria-label="Ülke kodu">
               <option value="+90">🇹🇷 +90</option>
@@ -358,7 +359,7 @@ function SiteFooter({ lang, TXT }) {
             konularda şahsıma ticari elektronik ileti göndermesine açık rıza veriyorum.
           </p>
           
-          {/* YÖNLENDİRME ALANI: Başarılı gönderimde kullanıcıyı ana sayfaya yönlendirir */}
+          {/* YÖNLENDİRME ALANI: Başarılı gönderimde kullanıcıyı sitenin ana dizinine yönlendirir */}
           <input type="hidden" name="_next" value="https://adshigh.com/" /> 
 
           <button type="submit">Gönder</button>
@@ -683,17 +684,18 @@ function Home({ lang, setLang, TXT }) {
         </div>
       </section>
 
-{/* Lead Popup - GÜNCELLENMİŞ VE EKSİKSİZ KOD */}
+{/* Lead Popup - KESİN KOD */}
       {leadOpen && (
         <div className="lead-popup show" role="dialog" aria-modal="true">
           <div className="box">
+            {/* Pop-up'ı kapatma butonu aynı kalacak */}
             <button className="close" onClick={()=>setLeadOpen(false)} aria-label="Kapat">✕</button>
             <h2>Birlikte Büyütelim</h2>
             <p style={{color:"#c6c9e9", marginTop:4, marginBottom:14}}>
               Formu Doldurun, Kısa Süre İçinde Dönüş Yapalım.
             </p>
             <form 
-              // Form verisini Formspree'ye gönderir. URL'nizi buraya yapıştırın.
+              // Formspree'ye veri göndermek için gerekli ayarlar
               action="https://formspree.io/f/xyznvdwn" 
               method="POST"
             >
@@ -701,9 +703,10 @@ function Home({ lang, setLang, TXT }) {
               <input placeholder="Soyisim" required name="soyad" />
               <input type="email" placeholder="E-posta" required name="_replyto" />
               
-              {/* YÖNLENDİRME ALANI: Başarılı gönderimde kullanıcıyı ana sayfaya yönlendirir */}
+              {/* YÖNLENDİRME ALANI: Başarılı gönderimde kullanıcıyı sitenin ana dizinine yönlendirir */}
               <input type="hidden" name="_next" value="https://adshigh.com/" /> 
 
+              {/* Pop-up kapanma işlemini buraya da ekliyoruz (Formspree yönlendirmeden önce) */}
               <button type="submit" onClick={()=>setLeadOpen(false)}>Gönder</button>
             </form>
           </div>
