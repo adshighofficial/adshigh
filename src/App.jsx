@@ -273,21 +273,23 @@ function SiteFooter({ lang, TXT }) {
           </ul>
         </div>
 
-        {/* Form (değiştirmedim) */}
+{/* Form (Footer/İletişim) - GÜNCELLENMİŞ VE EKSİKSİZ KOD */}
         <form
           className="fcol f-form f-form--clean"
-          onSubmit={(e)=>{e.preventDefault(); alert("Teşekkürler! Size en kısa sürede dönüş yapacağız.");}}
+          // Form verisini Formspree'ye gönderir. URL'nizi buraya yapıştırın.
+          action="https://formspree.io/f/xyznvdwn" 
+          method="POST"
         >
           <div className="f-form-head">
             <h3>İLETİŞİM FORMU</h3>
             <p>Hemen Doldur, Tanışalım</p>
           </div>
 
-          <input placeholder="İsim" required />
-          <input type="email" placeholder="E-posta" required />
+          <input placeholder="İsim" required name="ad_soyad" /> 
+          <input type="email" placeholder="E-posta" required name="_replyto" /> 
 
           <div className="phone-field">
-            <select className="phone-code" defaultValue="+90" aria-label="Ülke kodu">
+            <select className="phone-code" name="ulke_kodu" defaultValue="+90" aria-label="Ülke kodu">
               <option value="+90">🇹🇷 +90</option>
               <option value="+1">🇺🇸 +1</option>
               <option value="+44">🇬🇧 +44</option>
@@ -343,18 +345,21 @@ function SiteFooter({ lang, TXT }) {
               <option value="+256">🇺🇬 +256</option>
               <option value="+260">🇿🇲 +260</option>
             </select>
-            <input className="phone-input" type="tel" placeholder="Telefon" inputMode="tel" required />
+            <input className="phone-input" type="tel" placeholder="Telefon" inputMode="tel" required name="telefon" />
           </div>
 
-          <textarea className="msg" placeholder="Mesaj" rows="3"></textarea>
+          <textarea className="msg" placeholder="Mesaj" rows="3" name="mesaj"></textarea>
 
           <label className="consent">
-            <input type="checkbox" required /> Onaylıyorum
+            <input type="checkbox" required name="kvkk_onay" /> Onaylıyorum
           </label>
           <p className="kvkk">
             Kişisel verilerimin işlenmesine, AdsHigh'ın reklam, duyuru, bilgi, kampanya vb.
             konularda şahsıma ticari elektronik ileti göndermesine açık rıza veriyorum.
           </p>
+          
+          {/* YÖNLENDİRME ALANI: Başarılı gönderimde kullanıcıyı ana sayfaya yönlendirir */}
+          <input type="hidden" name="_next" value="https://adshigh.com/" /> 
 
           <button type="submit">Gönder</button>
         </form>
@@ -678,7 +683,7 @@ function Home({ lang, setLang, TXT }) {
         </div>
       </section>
 
-      {/* Lead Popup (dokunmadım) */}
+{/* Lead Popup - GÜNCELLENMİŞ VE EKSİKSİZ KOD */}
       {leadOpen && (
         <div className="lead-popup show" role="dialog" aria-modal="true">
           <div className="box">
@@ -687,11 +692,19 @@ function Home({ lang, setLang, TXT }) {
             <p style={{color:"#c6c9e9", marginTop:4, marginBottom:14}}>
               Formu Doldurun, Kısa Süre İçinde Dönüş Yapalım.
             </p>
-            <form onSubmit={(e)=>{e.preventDefault(); alert("Teşekkürler!"); setLeadOpen(false);}}>
-              <input placeholder="İsim" required />
-              <input placeholder="Soyisim" required />
-              <input type="email" placeholder="E-posta" required />
-              <button type="submit">Gönder</button>
+            <form 
+              // Form verisini Formspree'ye gönderir. URL'nizi buraya yapıştırın.
+              action="https://formspree.io/f/xyznvdwn" 
+              method="POST"
+            >
+              <input placeholder="İsim" required name="ad" />
+              <input placeholder="Soyisim" required name="soyad" />
+              <input type="email" placeholder="E-posta" required name="_replyto" />
+              
+              {/* YÖNLENDİRME ALANI: Başarılı gönderimde kullanıcıyı ana sayfaya yönlendirir */}
+              <input type="hidden" name="_next" value="https://adshigh.com/" /> 
+
+              <button type="submit" onClick={()=>setLeadOpen(false)}>Gönder</button>
             </form>
           </div>
         </div>
