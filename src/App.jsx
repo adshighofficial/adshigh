@@ -275,89 +275,123 @@ function SiteFooter({ lang, TXT }) {
 
         {/* Form (değiştirmedim) */}
         <form
-          className="fcol f-form f-form--clean"
-          onSubmit={(e)=>{e.preventDefault(); alert("Teşekkürler! Size en kısa sürede dönüş yapacağız.");}}
-        >
-          <div className="f-form-head">
-            <h3>İLETİŞİM FORMU</h3>
-            <p>Hemen Doldur, Tanışalım</p>
-          </div>
+  className="fcol f-form f-form--clean"
+  action="https://formspree.io/f/movpkybw"
+  method="POST"
+  target="_blank"               // ← Formspree success sayfası yeni sekmede
+  rel="noopener"
+  onSubmit={(e) => {
+    const f = e.currentTarget;
+    // Telefonu tek stringe birleştir
+    const code = f.querySelector('select[name="phone_code"]')?.value || "";
+    const raw  = f.querySelector('input[name="phone_raw"]')?.value || "";
+    const phoneHidden = f.querySelector('input[name="phone"]');
+    if (phoneHidden) phoneHidden.value = `${code} ${raw}`.trim();
 
-          <input placeholder="İsim" required />
-          <input type="email" placeholder="E-posta" required />
+    // UTM & sayfa bilgisi
+    const params = new URLSearchParams(window.location.search);
+    const utmSource  = params.get("utm_source")  || "";
+    const utmMedium  = params.get("utm_medium")  || "";
+    const utmCampaign= params.get("utm_campaign")|| "";
+    f.querySelector('input[name="utm_source"]').value   = utmSource;
+    f.querySelector('input[name="utm_medium"]').value   = utmMedium;
+    f.querySelector('input[name="utm_campaign"]').value = utmCampaign;
+    f.querySelector('input[name="page_url"]').value     = window.location.href;
+    f.querySelector('input[name="page_path"]').value    = window.location.pathname;
 
-          <div className="phone-field">
-            <select className="phone-code" defaultValue="+90" aria-label="Ülke kodu">
-              <option value="+90">🇹🇷 +90</option>
-              <option value="+1">🇺🇸 +1</option>
-              <option value="+44">🇬🇧 +44</option>
-              <option value="+49">🇩🇪 +49</option>
-              <option value="+33">🇫🇷 +33</option>
-              <option value="+39">🇮🇹 +39</option>
-              <option value="+34">🇪🇸 +34</option>
-              <option value="+7">🇷🇺 +7</option>
-              <option value="+30">🇬🇷 +30</option>
-              <option value="+31">🇳🇱 +31</option>
-              <option value="+32">🇧🇪 +32</option>
-              <option value="+46">🇸🇪 +46</option>
-              <option value="+47">🇳🇴 +47</option>
-              <option value="+45">🇩🇰 +45</option>
-              <option value="+43">🇦🇹 +43</option>
-              <option value="+41">🇨🇭 +41</option>
-              <option value="+351">🇵🇹 +351</option>
-              <option value="+48">🇵🇱 +48</option>
-              <option value="+420">🇨🇿 +420</option>
-              <option value="+421">🇸🇰 +421</option>
-              <option value="+36">🇭🇺 +36</option>
-              <option value="+40">🇷🇴 +40</option>
-              <option value="+380">🇺🇦 +380</option>
-              <option value="+962">🇯🇴 +962</option>
-              <option value="+971">🇦🇪 +971</option>
-              <option value="+974">🇶🇦 +974</option>
-              <option value="+20">🇪🇬 +20</option>
-              <option value="+212">🇲🇦 +212</option>
-              <option value="+216">🇹🇳 +216</option>
-              <option value="+92">🇵🇰 +92</option>
-              <option value="+91">🇮🇳 +91</option>
-              <option value="+62">🇮🇩 +62</option>
-              <option value="+60">🇲🇾 +60</option>
-              <option value="+65">🇸🇬 +65</option>
-              <option value="+63">🇵🇭 +63</option>
-              <option value="+66">🇹🇭 +66</option>
-              <option value="+84">🇻🇳 +84</option>
-              <option value="+81">🇯🇵 +81</option>
-              <option value="+82">🇰🇷 +82</option>
-              <option value="+86">🇨🇳 +86</option>
-              <option value="+61">🇦🇺 +61</option>
-              <option value="+64">🇳🇿 +64</option>
-              <option value="+1-CA">🇨🇦 +1</option>
-              <option value="+52">🇲🇽 +52</option>
-              <option value="+54">🇦🇷 +54</option>
-              <option value="+55">🇧🇷 +55</option>
-              <option value="+56">🇨🇱 +56</option>
-              <option value="+57">🇨🇴 +57</option>
-              <option value="+58">🇻🇪 +58</option>
-              <option value="+27">🇿🇦 +27</option>
-              <option value="+254">🇰🇪 +254</option>
-              <option value="+234">🇳🇬 +234</option>
-              <option value="+256">🇺🇬 +256</option>
-              <option value="+260">🇿🇲 +260</option>
-            </select>
-            <input className="phone-input" type="tel" placeholder="Telefon" inputMode="tel" required />
-          </div>
+    // DİKKAT: preventDefault YOK — normal POST yapsın
+  }}
+>
+  <div className="f-form-head">
+    <h3>İLETİŞİM FORMU</h3>
+    <p>Hemen Doldur, Tanışalım</p>
+  </div>
 
-          <textarea className="msg" placeholder="Mesaj" rows="3"></textarea>
+  <input name="name" placeholder="İsim" required />
+  <input name="email" type="email" placeholder="E-posta" required />
 
-          <label className="consent">
-            <input type="checkbox" required /> Onaylıyorum
-          </label>
-          <p className="kvkk">
-            Kişisel verilerimin işlenmesine, AdsHigh'ın reklam, duyuru, bilgi, kampanya vb.
-            konularda şahsıma ticari elektronik ileti göndermesine açık rıza veriyorum.
-          </p>
+  <div className="phone-field">
+    <select name="phone_code" className="phone-code" defaultValue="+90" aria-label="Ülke kodu" required>
+      <option value="+90">🇹🇷 +90</option>
+      <option value="+1">🇺🇸 +1</option>
+      <option value="+44">🇬🇧 +44</option>
+      <option value="+49">🇩🇪 +49</option>
+      <option value="+33">🇫🇷 +33</option>
+      <option value="+39">🇮🇹 +39</option>
+      <option value="+34">🇪🇸 +34</option>
+      <option value="+7">🇷🇺 +7</option>
+      <option value="+30">🇬🇷 +30</option>
+      <option value="+31">🇳🇱 +31</option>
+      <option value="+32">🇧🇪 +32</option>
+      <option value="+46">🇸🇪 +46</option>
+      <option value="+47">🇳🇴 +47</option>
+      <option value="+45">🇩🇰 +45</option>
+      <option value="+43">🇦🇹 +43</option>
+      <option value="+41">🇨🇭 +41</option>
+      <option value="+351">🇵🇹 +351</option>
+      <option value="+48">🇵🇱 +48</option>
+      <option value="+420">🇨🇿 +420</option>
+      <option value="+421">🇸🇰 +421</option>
+      <option value="+36">🇭🇺 +36</option>
+      <option value="+40">🇷🇴 +40</option>
+      <option value="+380">🇺🇦 +380</option>
+      <option value="+962">🇯🇴 +962</option>
+      <option value="+971">🇦🇪 +971</option>
+      <option value="+974">🇶🇦 +974</option>
+      <option value="+20">🇪🇬 +20</option>
+      <option value="+212">🇲🇦 +212</option>
+      <option value="+216">🇹🇳 +216</option>
+      <option value="+92">🇵🇰 +92</option>
+      <option value="+91">🇮🇳 +91</option>
+      <option value="+62">🇮🇩 +62</option>
+      <option value="+60">🇲🇾 +60</option>
+      <option value="+65">🇸🇬 +65</option>
+      <option value="+63">🇵🇭 +63</option>
+      <option value="+66">🇹🇭 +66</option>
+      <option value="+84">🇻🇳 +84</option>
+      <option value="+81">🇯🇵 +81</option>
+      <option value="+82">🇰🇷 +82</option>
+      <option value="+86">🇨🇳 +86</option>
+      <option value="+61">🇦🇺 +61</option>
+      <option value="+64">🇳🇿 +64</option>
+      <option value="+1-CA">🇨🇦 +1</option>
+      <option value="+52">🇲🇽 +52</option>
+      <option value="+54">🇦🇷 +54</option>
+      <option value="+55">🇧🇷 +55</option>
+      <option value="+56">🇨🇱 +56</option>
+      <option value="+57">🇨🇴 +57</option>
+      <option value="+58">🇻🇪 +58</option>
+      <option value="+27">🇿🇦 +27</option>
+      <option value="+254">🇰🇪 +254</option>
+      <option value="+234">🇳🇬 +234</option>
+      <option value="+256">🇺🇬 +256</option>
+      <option value="+260">🇿🇲 +260</option>
+    </select>
+    <input className="phone-input" type="tel" name="phone_raw" placeholder="Telefon" inputMode="tel" required />
+  </div>
 
-          <button type="submit">Gönder</button>
-        </form>
+  <textarea className="msg" name="message" placeholder="Mesaj" rows="3"></textarea>
+
+  <label className="consent">
+    <input type="checkbox" name="consent" required /> Onaylıyorum
+  </label>
+  <p className="kvkk">
+    Kişisel verilerimin işlenmesine, AdsHigh'ın reklam, duyuru, bilgi, kampanya vb.
+    konularda şahsıma ticari elektronik ileti göndermesine açık rıza veriyorum.
+  </p>
+
+  {/* GİZLİ ALANLAR */}
+  <input type="hidden" name="_subject" value="AdsHigh - Yeni Form (Footer)" />
+  <input type="hidden" name="_gotcha" />
+  <input type="hidden" name="phone" value="" />
+  <input type="hidden" name="utm_source" value="" />
+  <input type="hidden" name="utm_medium" value="" />
+  <input type="hidden" name="utm_campaign" value="" />
+  <input type="hidden" name="page_url" value="" />
+  <input type="hidden" name="page_path" value="" />
+
+  <button type="submit">Gönder</button>
+</form>
       </div>
 
       <div className="footer-bottom">
@@ -679,23 +713,46 @@ function Home({ lang, setLang, TXT }) {
       </section>
 
       {/* Lead Popup (dokunmadım) */}
-      {leadOpen && (
-        <div className="lead-popup show" role="dialog" aria-modal="true">
-          <div className="box">
-            <button className="close" onClick={()=>setLeadOpen(false)} aria-label="Kapat">✕</button>
-            <h2>Birlikte Büyütelim</h2>
-            <p style={{color:"#c6c9e9", marginTop:4, marginBottom:14}}>
-              Formu Doldurun, Kısa Süre İçinde Dönüş Yapalım.
-            </p>
-            <form onSubmit={(e)=>{e.preventDefault(); alert("Teşekkürler!"); setLeadOpen(false);}}>
-              <input placeholder="İsim" required />
-              <input placeholder="Soyisim" required />
-              <input type="email" placeholder="E-posta" required />
-              <button type="submit">Gönder</button>
-            </form>
-          </div>
-        </div>
-      )}
+     {leadOpen && (
+  <div className="lead-popup show" role="dialog" aria-modal="true">
+    <div className="box">
+      <button className="close" onClick={()=>setLeadOpen(false)} aria-label="Kapat">✕</button>
+      <h2>Birlikte Büyütelim</h2>
+      <p style={{color:"#c6c9e9", marginTop:4, marginBottom:14}}>
+        Formu Doldurun, Kısa Süre İçinde Dönüş Yapalım.
+      </p>
+
+      <form
+        action="https://formspree.io/f/movpkybw"
+        method="POST"
+        target="_blank"    // ← yeni sekme
+        rel="noopener"
+        onSubmit={(e)=>{
+          const f = e.currentTarget;
+          // UTM & sayfa
+          const params = new URLSearchParams(window.location.search);
+          f.querySelector('input[name="utm_source"]').value   = params.get("utm_source") || "";
+          f.querySelector('input[name="utm_medium"]').value   = params.get("utm_medium") || "";
+          f.querySelector('input[name="utm_campaign"]').value = params.get("utm_campaign") || "";
+          f.querySelector('input[name="page_url"]').value     = window.location.href;
+        }}
+      >
+        <input name="name" placeholder="İsim" required />
+        <input name="surname" placeholder="Soyisim" required />
+        <input name="email" type="email" placeholder="E-posta" required />
+
+        <input type="hidden" name="_subject" value="AdsHigh - Yeni Form (Popup)" />
+        <input type="hidden" name="_gotcha" />
+        <input type="hidden" name="utm_source" value="" />
+        <input type="hidden" name="utm_medium" value="" />
+        <input type="hidden" name="utm_campaign" value="" />
+        <input type="hidden" name="page_url" value="" />
+
+        <button type="submit">Gönder</button>
+      </form>
+    </div>
+  </div>
+)}
     </>
   );
 }
