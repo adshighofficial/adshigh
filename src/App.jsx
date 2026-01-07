@@ -548,14 +548,12 @@ function Home({ lang, setLang, TXT }) {
     {src:"/refs/beyyoglu-logo-colored.svg", alt:"BEYYOGLU"},
     {src:"/refs/mealboxlogo.webp", alt:"Meal Box"},
     {src:"/refs/stellalogo1.png", alt:"STELLA"},
-    {src:"/refs/logokayakirtasiye.png", alt:"Kaya Kirtasiye"},
     {src:"/refs/gardrops.png", alt:"Gardrops"},
     {src:"/refs/vatkali.svg", alt:"Vatkali"},
     {src:"/refs/beyyoglu-logo-colored.svg", alt:"BEYYOGLU"},
     {src:"/refs/stellalogo1.png", alt:"STELLA"},
     {src:"/refs/mealboxlogo.webp", alt:"Meal Box"},
     {src:"/refs/bsl.png", alt:"BSL"},
-    {src:"/refs/logokayakirtasiye.png", alt:"Kaya Kirtasiye"},
   ];
   const [refIdx, setRefIdx] = useState(0);
   const [refPaused, setRefPaused] = useState(false);
