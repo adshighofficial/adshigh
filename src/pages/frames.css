@@ -1,0 +1,305 @@
+:root {
+--bg0: #050505;
+--bg1: #0a0a0a;
+--brand-blue: #3b82f6;
+--brand-purple: #8b5cf6;
+--txt: #f8fafc;
+--muted2: rgba(248, 250, 252, 0.5);
+}
+
+.frames-page {
+min-height: 100vh;
+color: var(--txt);
+background: var(--bg0);
+font-family: 'Inter', -apple-system, sans-serif;
+overflow-x: hidden;
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 24px;
+}
+
+/* --- Hero Bölümü --- */
+.fp-hero { padding: 140px 0 80px; }
+.fp-hero__grid {
+display: grid;
+grid-template-columns: 1.1fr 0.9fr;
+gap: 40px;
+align-items: center;
+}
+
+.fp-badge {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+background: rgba(59, 130, 246, 0.1);
+border: 1px solid rgba(59, 130, 246, 0.2);
+padding: 6px 14px;
+border-radius: 99px;
+color: var(--brand-blue);
+font-size: 11px;
+font-weight: 800;
+letter-spacing: 1px;
+}
+
+.fp-dot {
+width: 6px;
+height: 6px;
+background: var(--brand-blue);
+border-radius: 50%;
+box-shadow: 0 0 10px var(--brand-blue);
+}
+
+.fp-h1 {
+font-size: clamp(40px, 5vw, 72px);
+line-height: 0.95;
+font-weight: 900;
+letter-spacing: -3px;
+margin: 20px 0;
+}
+
+.fp-grad {
+background: linear-gradient(to right, #60a5fa, #a78bfa);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+}
+
+.fp-sub { font-size: 18px; color: var(--muted2); line-height: 1.6; max-width: 480px; }
+
+.fp-ctaRow { display: flex; gap: 12px; margin-top: 32px; }
+
+.fp-btn {
+padding: 14px 28px;
+border-radius: 99px;
+font-weight: 700;
+text-decoration: none;
+transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fp-btn--primary { background: var(--brand-blue); color: white; }
+.fp-btn--primary:hover { background: #2563eb; transform: scale(1.05); }
+.fp-btn--ghost { border: 1px solid rgba(255,255,255,0.1); color: white; }
+.fp-btn--ghost:hover { background: rgba(255,255,255,0.05); }
+
+/* --- Hero Mockup Animasyonu --- */
+.fp-mock {
+position: relative;
+border-radius: 32px;
+overflow: hidden;
+border: 1px solid rgba(255,255,255,0.05);
+aspect-ratio: 1/1;
+background: #111;
+box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);
+}
+
+.fp-mockImg {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fp-img-raw { filter: grayscale(0.5) brightness(0.7); transform: scale(0.98); }
+
+.fp-hero-overlay-wrapper {
+position: absolute;
+inset: 0;
+opacity: 0;
+transform: translateY(20px) scale(0.95);
+transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+pointer-events: none;
+}
+
+.fp-hero-overlay-wrapper.active {
+opacity: 1;
+transform: translateY(0) scale(1);
+}
+
+.fp-toggle-status {
+position: absolute;
+top: 20px;
+right: 20px;
+background: rgba(0,0,0,0.8);
+backdrop-filter: blur(8px);
+padding: 8px 16px;
+border-radius: 99px;
+font-size: 10px;
+font-weight: 900;
+letter-spacing: 1.5px;
+border: 1px solid rgba(255,255,255,0.1);
+z-index: 10;
+}
+
+/* --- Özellikler Kartları --- */
+.fp-how { padding: 80px 0; }
+.fp-howGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.fp-card {
+background: #0f0f0f;
+border: 1px solid rgba(255,255,255,0.05);
+padding: 40px;
+border-radius: 32px;
+transition: all 0.4s;
+}
+.fp-card:hover {
+border-color: var(--brand-blue);
+background: #151515;
+transform: translateY(-8px);
+}
+.fp-ic { font-size: 36px; margin-bottom: 24px; }
+.fp-h3 { font-size: 20px; margin-bottom: 12px; }
+
+/* --- Frame Katmanları (Overlay) --- */
+.fp-overlay { position: absolute; inset: 0; pointer-events: none; }
+
+/* 1. Minimal Stil */
+.fp-overlay--minimal { display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; }
+.fp-min-bar {
+background: white;
+padding: 14px 24px;
+border-radius: 16px;
+box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+.fp-min-info { display: flex; justify-content: space-between; align-items: center; color: black; }
+.fp-min-tag { font-size: 11px; font-weight: 800; color: #888; letter-spacing: 1px; }
+.fp-min-price { font-size: 20px; font-weight: 900; }
+
+/* 2. Black Friday Stili */
+.fp-overlay--bf { padding: 20px; display: flex; flex-direction: column; justify-content: space-between; }
+.fp-bf-badge {
+background: #ff0000;
+color: white;
+padding: 10px 20px;
+font-weight: 900;
+transform: skewX(-15deg);
+align-self: flex-start;
+font-size: 14px;
+}
+.fp-bf-footer {
+background: #000;
+color: white;
+padding: 20px;
+border-radius: 4px;
+border-top: 4px solid #ff0000;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.fp-bf-percent { font-size: 16px; font-weight: 900; font-style: italic; color: #ff0000; }
+.fp-bf-price { font-size: 24px; font-weight: 950; }
+
+/* 3. Luxury Stil */
+.fp-overlay--lux { padding: 30px; display: flex; align-items: center; justify-content: center; }
+.fp-lux-border {
+border: 1px solid rgba(212, 175, 55, 0.4);
+padding: 8px;
+width: 100%;
+height: 100%;
+display: flex;
+}
+.fp-lux-content {
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: flex-end;
+background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
+padding: 30px;
+}
+.fp-lux-tag {
+color: #d4af37;
+font-size: 10px;
+letter-spacing: 5px;
+border-bottom: 1px solid #d4af37;
+padding-bottom: 6px;
+margin-bottom: 12px;
+text-transform: uppercase;
+}
+.fp-lux-price { color: #d4af37; font-size: 28px; font-weight: 300; font-family: serif; }
+
+/* 4. Flash Fırsat Stili */
+.fp-overlay--flash { padding: 20px; display: flex; flex-direction: column; justify-content: space-between; }
+.fp-flash-top {
+background: #f59e0b;
+color: black;
+padding: 8px 16px;
+border-radius: 99px;
+font-weight: 900;
+font-size: 11px;
+align-self: flex-end;
+}
+.fp-flash-bar {
+background: rgba(245, 158, 11, 0.95);
+backdrop-filter: blur(12px);
+padding: 16px;
+border-radius: 20px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+color: black;
+}
+.fp-flash-label { font-weight: 900; font-size: 12px; }
+.fp-flash-price { font-size: 24px; font-weight: 950; }
+
+/* --- Galeri Bölümü --- */
+.fp-gallery { padding: 100px 0; }
+.fp-gallery__head {
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+margin-bottom: 60px;
+}
+.fp-h2 { font-size: 40px; font-weight: 900; margin-bottom: 12px; }
+
+.fp-pills {
+display: flex;
+gap: 8px;
+background: #111;
+padding: 6px;
+border-radius: 99px;
+border: 1px solid rgba(255,255,255,0.05);
+}
+.fp-pill {
+border: none;
+background: transparent;
+color: var(--muted2);
+padding: 10px 24px;
+border-radius: 99px;
+cursor: pointer;
+font-weight: 700;
+font-size: 13px;
+transition: 0.3s;
+}
+.fp-pill--on { background: white; color: black; }
+
+.fp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+.fp-frameCard { border-radius: 32px; overflow: hidden; background: #0a0a0a; border: 1px solid rgba(255,255,255,0.03); }
+.fp-frame { position: relative; width: 100%; aspect-ratio: 1/1; }
+.fp-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.fp-frameMeta { padding: 24px; }
+.fp-metaName { font-size: 18px; font-weight: 800; margin-bottom: 6px; }
+.fp-metaDesc { font-size: 14px; color: var(--muted2); }
+
+/* --- Yardımcı Sınıflar & Mobil --- */
+.animate-bounce {
+animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-8px); }
+}
+
+@media (max-width: 992px) {
+.fp-hero__grid { grid-template-columns: 1fr; text-align: center; }
+.fp-sub { margin-left: auto; margin-right: auto; }
+.fp-ctaRow { justify-content: center; }
+}
+
+@media (max-width: 768px) {
+.fp-howGrid { grid-template-columns: 1fr; }
+.fp-grid { grid-template-columns: 1fr; }
+.fp-gallery__head { flex-direction: column; align-items: center; gap: 30px; text-align: center; }
+.fp-pills { overflow-x: auto; max-width: 100%; }
+}

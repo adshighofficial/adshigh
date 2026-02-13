@@ -1,9 +1,13 @@
 
 // src/App.jsx
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Link, useLocation, Outlet, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, useLocation, Outlet, useNavigate, Link as RLink } from "react-router-dom";
 import "./index.css";
 import ThemeOverrides from "./theme-override.jsx";
+import FramesPage from "./pages/FramesPage";
+
+import AdsHighFrames from "./pages/FramesPage.jsx";
+
 import ServiceDetailLite from "./pages/ServiceDetailLite";
 
 /* Router scroll reset */
@@ -76,6 +80,8 @@ export default function App(){
       <Routes>
         <Route element={<Layout lang={lang} setLang={setLang} TXT={TXT} />}>
           <Route path="/" element={<Home lang={lang} setLang={setLang} TXT={TXT} />} />
+          <Route path="/frames" element={<FramesPage />} />
+          <Route path="/highframes" element={<AdsHighFrames />} />
           <Route path="/hizmetler/:slug" element={<ServiceDetailLite />} />
           <Route path="/services/:slug" element={<ServiceDetailLite />} />
           <Route path="*" element={<Home lang={lang} setLang={setLang} TXT={TXT} />} />
@@ -104,6 +110,12 @@ function Header({ lang, setLang, TXT }) {
   const [isMobile, setIsMobile] = useState(() => window.matchMedia("(max-width:960px)").matches);
   const [scrolled, setScrolled] = useState(false);
   const [openServices, setOpenServices] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+useEffect(() => {
+  document.body.classList.toggle("no-scroll", mobileOpen);
+  return () => document.body.classList.remove("no-scroll");
+}, [mobileOpen]);
 
   // viewport değişimi
   useEffect(()=>{
@@ -126,18 +138,17 @@ function Header({ lang, setLang, TXT }) {
 const goTo = (id) => (e) => {
   e.preventDefault();
 
-  // Anasayfadaysak: direkt kaydır
-  if (location.pathname === "/") {
-    const el = document.getElementById(id);
-    if (!el) return;
+  // 1) O anki sayfada hedef varsa direkt kaydır
+  const elHere = document.getElementById(id);
+  if (elHere) {
     const headerH = document.querySelector(".header")?.offsetHeight ?? 68;
-    const y = el.getBoundingClientRect().top + window.scrollY - (headerH + 8);
+    const y = elHere.getBoundingClientRect().top + window.scrollY - (headerH + 8);
     window.scrollTo({ top: y, behavior: "smooth" });
     return;
   }
 
-  // Anasayfada değilsek: önce "/"e git, Home açılınca oraya kaydır
-  navigate("/", { state: { scrollTo: id } });
+  // 2) Yoksa anasayfaya HASH ile git (ScrollToHash halleder)
+  navigate(`/#${id}`);
 };
 
   const SERVICES = [
@@ -156,67 +167,144 @@ const goTo = (id) => (e) => {
     { slug:"dijital-danismanlik", t:"Dijital Danışmanlık" },
   ];
 
-  return (
+return (
+  <>
     <header className={`header ${scrolled ? "scrolled" : ""}`}>
       <div className="container header-grid">
-        <Link to="/" className="site-logo" aria-label="AdsHigh anasayfa">
+        {/* LOGO */}
+        <Link to="/" className="site-logo">
           <img src="/adshigh_logo.png" alt="AdsHigh" className="logo-img" />
         </Link>
 
-<nav className="nav center-nav" onMouseLeave={()=>setOpenServices(false)}>
-  <div
-    className="nav-item has-dd"
-    onMouseEnter={()=>!isMobile && setOpenServices(true)}
-    onFocus={()=>!isMobile && setOpenServices(true)}
-    // ↓ mobilde preventDefault yok; sadece desktop’ta hover ile açıyoruz
-  >
-    <a
-  href="/#services"
-  onClick={(e) => {
-    e.preventDefault();
-    setOpenServices(false);       // dropdown kapansın
-    navigate("/#services");       // neredeysen oraya git + hash
-  }}
->
-  {isMobile ? TXT.tr.nav_services_mobile : TXT.tr.nav_services}
-</a>
+        {/* DESKTOP NAV */}
+        {!isMobile && (
+          <nav className="nav center-nav">
+            <a href="/#services" onClick={goTo("services")}>{TXT.tr.nav_services}</a>
 
-    {/* Dropdown sadece desktop’ta */}
-    {!isMobile && (
-      <div className={`dd dd-services ${openServices ? "show" : ""}`}
-           onMouseEnter={()=>setOpenServices(true)}
-           onMouseLeave={()=>setOpenServices(false)}>
-        <ul className="dd-list">
-          {SERVICES.map(s=>(
-            <li key={s.slug}>
-              <Link to={`/hizmetler/${s.slug}`} className="dd-link" onClick={()=>setOpenServices(false)}>
-                {s.t}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
-  </div>
+            <Link to="/highframes" className="nav-highframes">
+              <img src="/highframes_logo.png" alt="HighFrames" />
+            </Link>
 
-  {/* Yaklaşımlar — sadece desktop’ta */}
-  {!isMobile && (
-    <a href="/#approaches" onClick={goTo("approaches")}>
-      {TXT.tr.nav_approaches}
-    </a>
-  )}
-</nav>
+            <a href="/#approaches" onClick={goTo("approaches")}>{TXT.tr.nav_approaches}</a>
+          </nav>
+        )}
 
-        {/* Sağ CTA – eski yerinde */}
-        <div className="header-cta">
-          <a className="btn" href="/#contact" onClick={goTo("contact")}>{TXT.tr.cta}</a>
-        </div>
+        {/* MOBILE HAMBURGER */}
+        {isMobile && (
+          <button
+            type="button"
+            className="hamb-btn"
+            onClick={() => setMobileOpen(v => !v)}
+            aria-label="Menü"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        )}
+
+        {/* CTA */}
+        {!isMobile && (
+          <div className="header-cta">
+            <a className="btn" href="/#contact" onClick={goTo("contact")}>
+              {TXT.tr.cta}
+            </a>
+          </div>
+        )}
       </div>
     </header>
-  );
+
+{/* MOBILE DRAWER */}
+{isMobile && mobileOpen && (
+  <div className="mnav" role="dialog" aria-modal="true">
+    {/* overlay */}
+    <div className="mnav-backdrop" onClick={() => setMobileOpen(false)} />
+
+    {/* panel */}
+    <div className="mnav-panel" onClick={(e) => e.stopPropagation()}>
+      {/* TOP BAR (logo + close) */}
+      <div className="mnav-top">
+        <Link
+          to="/"
+          className="mnav-logo"
+          onClick={() => setMobileOpen(false)}
+          aria-label="AdsHigh anasayfa"
+        >
+          <img src="/adshigh_logo.png" alt="AdsHigh" />
+        </Link>
+
+        <button className="mnav-close" onClick={() => setMobileOpen(false)} aria-label="Kapat">
+          ✕
+        </button>
+      </div>
+
+      {/* MENU ITEMS */}
+      <nav className="mnav-list">
+        {/* Anasayfa - diğerleriyle aynı class */}
+        <Link to="/" className="mnav-item" onClick={() => setMobileOpen(false)}>
+          Anasayfa
+        </Link>
+
+        <Link to="/highframes" className="mnav-item" onClick={() => setMobileOpen(false)}>
+          HighFrames
+        </Link>
+
+        <button
+          type="button"
+          className="mnav-item mnav-item--row"
+          onClick={() => setMobileServicesOpen(v => !v)}
+          aria-expanded={mobileServicesOpen}
+        >
+          <span>Hizmetler</span>
+          <span className={`mnav-chevron ${mobileServicesOpen ? "open" : ""}`}>▾</span>
+        </button>
+
+        {mobileServicesOpen && (
+          <div className="mnav-sub">
+            {SERVICES.map(s => (
+              <Link
+                key={s.slug}
+                to={`/hizmetler/${s.slug}`}
+                className="mnav-subitem"
+                onClick={() => setMobileOpen(false)}
+              >
+                {s.t}
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* Referanslar */}
+        <a
+          href="/#ref"
+          className="mnav-item"
+          onClick={(e) => {
+            goTo("ref")(e);
+            setMobileOpen(false);
+          }}
+        >
+          Referanslar
+        </a>
+
+        {/* İletişim */}
+        <a
+          href="/#contact"
+          className="mnav-item"
+          onClick={(e) => {
+            goTo("contact")(e);
+            setMobileOpen(false);
+          }}
+        >
+          İletişim
+        </a>
+      </nav>
+    </div>
+  </div>
+)}
+  </>
+);
 }
 /* ========== FOOTER ========== */
-import { Link as RLink } from "react-router-dom"; // üstte zaten var, burada sadece referans
 
 function SiteFooter({ lang, TXT }) {
   return (
@@ -544,11 +632,13 @@ function Home({ lang, setLang, TXT }) {
   const REFS = [
     {src:"/refs/vatkali.svg", alt:"Vatkali"},
     {src:"/refs/gardrops.png", alt:"Gardrops"},
+    {src:"/refs/Forinvestlogo.png", alt:"forinvest"},
     {src:"/refs/bsl.png", alt:"BSL"},
     {src:"/refs/beyyoglu-logo-colored.svg", alt:"BEYYOGLU"},
     {src:"/refs/mealboxlogo.webp", alt:"Meal Box"},
     {src:"/refs/stellalogo1.png", alt:"STELLA"},
     {src:"/refs/gardrops.png", alt:"Gardrops"},
+    {src:"/refs/Forinvestlogo.png", alt:"forinvest"},
     {src:"/refs/vatkali.svg", alt:"Vatkali"},
     {src:"/refs/beyyoglu-logo-colored.svg", alt:"BEYYOGLU"},
     {src:"/refs/stellalogo1.png", alt:"STELLA"},
@@ -713,6 +803,7 @@ function Home({ lang, setLang, TXT }) {
           </div>
         </div>
       </section>
+
 
       {/* Lead Popup (dokunmadım) */}
      {leadOpen && (
