@@ -5257,3 +5257,44 @@ body.menu-open{ overflow: hidden !important; }
   text-decoration: none;
   padding: 6px 2px;
 }
+/* iOS Safari: input focus olunca zoom yapmayı engelle (font-size >= 16px şart) */
+@media (max-width: 960px) {
+  input, textarea, select, button {
+    font-size: 16px;
+    line-height: 1.2;
+  }
+}
+
+/* Genel: iOS metin boyutu otomatik oynamasın */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* HighFrames + Footer form: yazı daha koyu note: kendi class'ların varsa daha da scope edebilirsin */
+.footer--brand .f-form input,
+.footer--brand .f-form textarea,
+.footer--brand .f-form select,
+.demo-form input,
+.demo-form textarea,
+.demo-form select {
+  color: #0B1020;           /* yazılan metin */
+  caret-color: #5B21B6;     /* imleç */
+}
+
+/* Placeholder daha görünür */
+.footer--brand .f-form input::placeholder,
+.footer--brand .f-form textarea::placeholder,
+.demo-form input::placeholder,
+.demo-form textarea::placeholder {
+  color: rgba(11,16,32,.45);
+  opacity: 1; /* iOS için */
+}
+
+/* Focus olunca aşırı glow/zoom hissini azalt */
+.footer--brand .f-form input:focus,
+.footer--brand .f-form textarea:focus,
+.demo-form input:focus,
+.demo-form textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(91,33,182,.20);
+}
