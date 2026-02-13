@@ -283,10 +283,10 @@ const TemplateComparePanel = () => {
       {/* ✅ MOBILE: boşluğu yarıya indir + telefonları %50 büyüt (PNG boşluğunu kırpar) */}
       <div className="block lg:hidden w-full mx-auto -mt-10 sm:-mt-14">
         <div className="grid grid-cols-2 gap-3 px-3 items-start">
-          <div className="h-[458px] sm:h-[600px] overflow-hidden rounded-3xl">
+          <div className="h-[358px] sm:h-[600px] overflow-hidden rounded-3xl">
             <img src={rawImg} alt="Framesiz" draggable={false} className="w-full h-full object-cover object-top scale-[0.9]" />
           </div>
-          <div className="h-[458px] sm:h-[600px] overflow-hidden rounded-3xl">
+          <div className="h-[358px] sm:h-[600px] overflow-hidden rounded-3xl">
             <img src={framedImg} alt="Frameli" draggable={false} className="w-full h-full object-cover object-top scale-[0.9]" />
           </div>
         </div>
