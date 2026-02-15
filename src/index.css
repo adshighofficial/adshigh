@@ -5298,3 +5298,65 @@ html {
   outline: none;
   box-shadow: 0 0 0 3px rgba(91,33,182,.20);
 }
+.mnav-overlay{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.mnav-drawer{
+  height: 100svh;          /* iOS için daha iyi */
+  overflow-y: auto;        /* scroll MENÜ içinde */
+  -webkit-overflow-scrolling: touch;
+}
+.mnav-overlay{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(8px);
+}
+
+.mnav-drawer{
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba(11,16,32,.92);
+}
+
+/* üst bar sabit */
+.mnav-top{
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: rgba(11,16,32,.98);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+/* 👇 SCROLL BURADA */
+.mnav-scroll{
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+  padding-bottom: 24px;
+}
+.mnav-drawer{
+  display:flex;
+  flex-direction:column;
+}
+
+.mnav-scroll{
+  flex:1;
+  overflow-y:auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 18px 18px 26px;
+}
+.demo-form input,
+.demo-form textarea,
+.demo-form select{
+  color:#000 !important;
+}

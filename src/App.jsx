@@ -2,6 +2,7 @@
 // src/App.jsx
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Link, useLocation, Outlet, useNavigate, Link as RLink } from "react-router-dom";
+
 import "./index.css";
 import ThemeOverrides from "./theme-override.jsx";
 import FramesPage from "./pages/FramesPage";
@@ -116,6 +117,41 @@ useEffect(() => {
   document.body.classList.toggle("no-scroll", mobileOpen);
   return () => document.body.classList.remove("no-scroll");
 }, [mobileOpen]);
+useEffect(() => {
+  if (!isMobile) return;
+
+  if (mobileOpen) {
+    const y = window.scrollY;
+    document.body.dataset.scrollY = String(y);
+
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${y}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+  } else {
+    const y = parseInt(document.body.dataset.scrollY || "0", 10);
+
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.width = "";
+    delete document.body.dataset.scrollY;
+
+    window.scrollTo(0, y);
+  }
+
+  return () => {
+    // güvenli temizlik (sayfa değişince vs.)
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.width = "";
+    delete document.body.dataset.scrollY;
+  };
+}, [mobileOpen, isMobile]);
 
   // viewport değişimi
   useEffect(()=>{
@@ -135,20 +171,29 @@ useEffect(() => {
 
  const location = useLocation(); // Header'ın içinde olsun (navigate zaten var)
 
+const scrollToId = (id) => {
+  const el = document.getElementById(id);
+  if (!el) return false;
+
+  const headerH = document.querySelector(".header")?.offsetHeight ?? 68;
+  const y = el.getBoundingClientRect().top + window.scrollY - (headerH + 8);
+  window.scrollTo({ top: y, behavior: "smooth" });
+  return true;
+};
+
 const goTo = (id) => (e) => {
   e.preventDefault();
 
-  // 1) O anki sayfada hedef varsa direkt kaydır
-  const elHere = document.getElementById(id);
-  if (elHere) {
-    const headerH = document.querySelector(".header")?.offsetHeight ?? 68;
-    const y = elHere.getBoundingClientRect().top + window.scrollY - (headerH + 8);
-    window.scrollTo({ top: y, behavior: "smooth" });
-    return;
-  }
+  // menüyü önce kapat
+  setMobileOpen(false);
 
-  // 2) Yoksa anasayfaya HASH ile git (ScrollToHash halleder)
-  navigate(`/#${id}`);
+  // body unlock olduktan sonra scroll
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      if (scrollToId(id)) return;
+      navigate(`/#${id}`);
+    });
+  });
 };
 
   const SERVICES = [
@@ -233,71 +278,77 @@ return (
           <img src="/adshigh_logo.png" alt="AdsHigh" />
         </Link>
 
-        <button className="mnav-close" onClick={() => setMobileOpen(false)} aria-label="Kapat">
+        <button
+          className="mnav-close"
+          onClick={() => setMobileOpen(false)}
+          aria-label="Kapat"
+        >
           ✕
         </button>
       </div>
 
-      {/* MENU ITEMS */}
-      <nav className="mnav-list">
-        {/* Anasayfa - diğerleriyle aynı class */}
-        <Link to="/" className="mnav-item" onClick={() => setMobileOpen(false)}>
-          Anasayfa
-        </Link>
+      {/* ✅ SCROLL ALANI */}
+      <div className="mnav-scroll">
+        <nav className="mnav-list">
+          {/* Anasayfa */}
+          <Link to="/" className="mnav-item" onClick={() => setMobileOpen(false)}>
+            Anasayfa
+          </Link>
 
-        <Link to="/highframes" className="mnav-item" onClick={() => setMobileOpen(false)}>
-          HighFrames
-        </Link>
+          <Link to="/highframes" className="mnav-item" onClick={() => setMobileOpen(false)}>
+            HighFrames
+          </Link>
 
-        <button
-          type="button"
-          className="mnav-item mnav-item--row"
-          onClick={() => setMobileServicesOpen(v => !v)}
-          aria-expanded={mobileServicesOpen}
-        >
-          <span>Hizmetler</span>
-          <span className={`mnav-chevron ${mobileServicesOpen ? "open" : ""}`}>▾</span>
-        </button>
+          <button
+            type="button"
+            className="mnav-item mnav-item--row"
+            onClick={() => setMobileServicesOpen((v) => !v)}
+            aria-expanded={mobileServicesOpen}
+          >
+            <span>Hizmetler</span>
+            <span className={`mnav-chevron ${mobileServicesOpen ? "open" : ""}`}>▾</span>
+          </button>
 
-        {mobileServicesOpen && (
-          <div className="mnav-sub">
-            {SERVICES.map(s => (
-              <Link
-                key={s.slug}
-                to={`/hizmetler/${s.slug}`}
-                className="mnav-subitem"
-                onClick={() => setMobileOpen(false)}
-              >
-                {s.t}
-              </Link>
-            ))}
-          </div>
-        )}
+          {mobileServicesOpen && (
+            <div className="mnav-sub">
+              {SERVICES.map((s) => (
+                <Link
+                  key={s.slug}
+                  to={`/hizmetler/${s.slug}`}
+                  className="mnav-subitem"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {s.t}
+                </Link>
+              ))}
+            </div>
+          )}
 
-        {/* Referanslar */}
-        <a
-          href="/#ref"
-          className="mnav-item"
-          onClick={(e) => {
-            goTo("ref")(e);
-            setMobileOpen(false);
-          }}
-        >
-          Referanslar
-        </a>
+          {/* Referanslar */}
+          <a
+            href="/#ref"
+            className="mnav-item"
+            onClick={(e) => {
+              goTo("ref")(e);
+              setMobileOpen(false);
+            }}
+          >
+            Referanslar
+          </a>
 
-        {/* İletişim */}
-        <a
-          href="/#contact"
-          className="mnav-item"
-          onClick={(e) => {
-            goTo("contact")(e);
-            setMobileOpen(false);
-          }}
-        >
-          İletişim
-        </a>
-      </nav>
+          {/* İletişim */}
+          <a
+            href="/#contact"
+            className="mnav-item"
+            onClick={(e) => {
+              goTo("contact")(e);
+              setMobileOpen(false);
+            }}
+          >
+            İletişim
+          </a>
+        </nav>
+      </div>
     </div>
   </div>
 )}

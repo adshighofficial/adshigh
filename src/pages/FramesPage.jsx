@@ -552,7 +552,7 @@ const App = () => {
         </p>
 
         {/* ✅ Formspree */}
-        <form className="space-y-4 text-left" action={FORMSPREE_ENDPOINT} method="POST">
+        <form className="demo-form space-y-4 text-left" action={FORMSPREE_ENDPOINT} method="POST">
           <div className="grid md:grid-cols-2 gap-4">
             <input
               type="text"
