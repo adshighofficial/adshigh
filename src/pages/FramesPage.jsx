@@ -126,7 +126,7 @@ const HeroSplitSlider = () => {
       onMouseMove={handle}
       onTouchMove={handle}
       onMouseEnter={() => setAuto(false)}
-      aria-label="Framesiz / Frameli karşılaştırma"
+      aria-label="Orijinal / Frame karşılaştırma"
     >
       <div className="absolute inset-0 bg-slate-50 p-6">
         <img src={ASSETS.heroRaw} alt="Framesiz" className="w-full h-full object-contain" draggable={false} />
@@ -531,7 +531,7 @@ const App = () => {
               Şablon <span style={{ color: BRAND.accent }}>kütüphanesi</span>
             </h2>
             <p className="text-slate-500 font-semibold max-w-lg">
-              Framesiz → Frameli farkını gerçek örnekler üzerinden görün. Aynı ürün, daha güçlü teklif.
+              Orjinial Versiyon → Frame Versiyon farkını gerçek örnekler üzerinden görün. Aynı ürün, daha güçlü teklif.
             </p>
           </div>
         </div>
