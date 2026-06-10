@@ -355,6 +355,8 @@ return (
   </>
 );
 }
+
+
 /* ========== FOOTER ========== */
 
 function SiteFooter({ lang, TXT }) {
@@ -367,6 +369,7 @@ function SiteFooter({ lang, TXT }) {
           <RLink to="/" className="site-logo f-logo" aria-label="AdsHigh anasayfa">
             <img src="/adshigh_logo.png" alt="AdsHigh" className="logo-img" />
           </RLink>
+
           <p className="f-desc">
             Veri odaklı performans pazarlama. Google, Sosyal ve Programatik kanallarda
             şeffaf ölçüm ve sürdürülebilir büyüme.
@@ -376,9 +379,11 @@ function SiteFooter({ lang, TXT }) {
             <a href="https://www.linkedin.com/company/adshigh" target="_blank" rel="noreferrer" aria-label="LinkedIn">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0ZM.4 8.09h4.2V24H.4zM8.44 8.09h4.02v2.17h.06c.56-1.06 1.93-2.17 3.98-2.17 4.25 0 5.03 2.8 5.03 6.44V24h-4.2v-7.1c0-1.7-.03-3.9-2.38-3.9-2.38 0-2.74 1.86-2.74 3.78V24H8.44z"/></svg>
             </a>
+
             <a href="https://www.facebook.com/people/AdsHigh/61579677954876/" target="_blank" rel="noreferrer" aria-label="Facebook">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7H7.9V12h2.6V9.7c0-2.6 1.6-4 3.9-4 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.5 2.9h-2.4v7A10 10 0 0 0 22 12"/></svg>
             </a>
+
             <a href="https://www.instagram.com/adshighofficial/" target="_blank" rel="noreferrer" aria-label="Instagram">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
                 <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Z"/>
@@ -386,8 +391,23 @@ function SiteFooter({ lang, TXT }) {
                 <circle cx="17.5" cy="6.5" r="1.2"/>
               </svg>
             </a>
+
             <a href="mailto:info@adshigh.com" aria-label="E-posta">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5Z"/></svg>
+            </a>
+          </div>
+
+          <div className="google-partner">
+            <a
+              href="https://www.google.com/partners/agency?id=3340084818"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Google Partner doğrulama sayfası"
+            >
+              <img
+                src="https://www.gstatic.com/partners/badge/images/2026/PartnerBadgeClickable.svg"
+                alt="Google Partner"
+              />
             </a>
           </div>
         </div>
@@ -412,125 +432,118 @@ function SiteFooter({ lang, TXT }) {
           </ul>
         </div>
 
-        {/* Form (değiştirmedim) */}
+        {/* Form */}
         <form
-  className="fcol f-form f-form--clean"
-  action="https://formspree.io/f/movpkybw"
-  method="POST"
-  target="_blank"               // ← Formspree success sayfası yeni sekmede
-  rel="noopener"
-  onSubmit={(e) => {
-    const f = e.currentTarget;
-    // Telefonu tek stringe birleştir
-    const code = f.querySelector('select[name="phone_code"]')?.value || "";
-    const raw  = f.querySelector('input[name="phone_raw"]')?.value || "";
-    const phoneHidden = f.querySelector('input[name="phone"]');
-    if (phoneHidden) phoneHidden.value = `${code} ${raw}`.trim();
+          className="fcol f-form f-form--clean"
+          action="https://formspree.io/f/movpkybw"
+          method="POST"
+          target="_blank"
+          rel="noopener"
+          onSubmit={(e) => {
+            const f = e.currentTarget;
+            const code = f.querySelector('select[name="phone_code"]')?.value || "";
+            const raw = f.querySelector('input[name="phone_raw"]')?.value || "";
+            const phoneHidden = f.querySelector('input[name="phone"]');
+            if (phoneHidden) phoneHidden.value = `${code} ${raw}`.trim();
 
-    // UTM & sayfa bilgisi
-    const params = new URLSearchParams(window.location.search);
-    const utmSource  = params.get("utm_source")  || "";
-    const utmMedium  = params.get("utm_medium")  || "";
-    const utmCampaign= params.get("utm_campaign")|| "";
-    f.querySelector('input[name="utm_source"]').value   = utmSource;
-    f.querySelector('input[name="utm_medium"]').value   = utmMedium;
-    f.querySelector('input[name="utm_campaign"]').value = utmCampaign;
-    f.querySelector('input[name="page_url"]').value     = window.location.href;
-    f.querySelector('input[name="page_path"]').value    = window.location.pathname;
+            const params = new URLSearchParams(window.location.search);
+            f.querySelector('input[name="utm_source"]').value = params.get("utm_source") || "";
+            f.querySelector('input[name="utm_medium"]').value = params.get("utm_medium") || "";
+            f.querySelector('input[name="utm_campaign"]').value = params.get("utm_campaign") || "";
+            f.querySelector('input[name="page_url"]').value = window.location.href;
+            f.querySelector('input[name="page_path"]').value = window.location.pathname;
+          }}
+        >
+          <div className="f-form-head">
+            <h3>İLETİŞİM FORMU</h3>
+            <p>Hemen Doldur, Tanışalım</p>
+          </div>
 
-    // DİKKAT: preventDefault YOK — normal POST yapsın
-  }}
->
-  <div className="f-form-head">
-    <h3>İLETİŞİM FORMU</h3>
-    <p>Hemen Doldur, Tanışalım</p>
-  </div>
+          <input name="name" placeholder="İsim" required />
+          <input name="email" type="email" placeholder="E-posta" required />
 
-  <input name="name" placeholder="İsim" required />
-  <input name="email" type="email" placeholder="E-posta" required />
+          <div className="phone-field">
+            <select name="phone_code" className="phone-code" defaultValue="+90" aria-label="Ülke kodu" required>
+              <option value="+90">🇹🇷 +90</option>
+              <option value="+1">🇺🇸 +1</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+49">🇩🇪 +49</option>
+              <option value="+33">🇫🇷 +33</option>
+              <option value="+39">🇮🇹 +39</option>
+              <option value="+34">🇪🇸 +34</option>
+              <option value="+7">🇷🇺 +7</option>
+              <option value="+30">🇬🇷 +30</option>
+              <option value="+31">🇳🇱 +31</option>
+              <option value="+32">🇧🇪 +32</option>
+              <option value="+46">🇸🇪 +46</option>
+              <option value="+47">🇳🇴 +47</option>
+              <option value="+45">🇩🇰 +45</option>
+              <option value="+43">🇦🇹 +43</option>
+              <option value="+41">🇨🇭 +41</option>
+              <option value="+351">🇵🇹 +351</option>
+              <option value="+48">🇵🇱 +48</option>
+              <option value="+420">🇨🇿 +420</option>
+              <option value="+421">🇸🇰 +421</option>
+              <option value="+36">🇭🇺 +36</option>
+              <option value="+40">🇷🇴 +40</option>
+              <option value="+380">🇺🇦 +380</option>
+              <option value="+962">🇯🇴 +962</option>
+              <option value="+971">🇦🇪 +971</option>
+              <option value="+974">🇶🇦 +974</option>
+              <option value="+20">🇪🇬 +20</option>
+              <option value="+212">🇲🇦 +212</option>
+              <option value="+216">🇹🇳 +216</option>
+              <option value="+92">🇵🇰 +92</option>
+              <option value="+91">🇮🇳 +91</option>
+              <option value="+62">🇮🇩 +62</option>
+              <option value="+60">🇲🇾 +60</option>
+              <option value="+65">🇸🇬 +65</option>
+              <option value="+63">🇵🇭 +63</option>
+              <option value="+66">🇹🇭 +66</option>
+              <option value="+84">🇻🇳 +84</option>
+              <option value="+81">🇯🇵 +81</option>
+              <option value="+82">🇰🇷 +82</option>
+              <option value="+86">🇨🇳 +86</option>
+              <option value="+61">🇦🇺 +61</option>
+              <option value="+64">🇳🇿 +64</option>
+              <option value="+1-CA">🇨🇦 +1</option>
+              <option value="+52">🇲🇽 +52</option>
+              <option value="+54">🇦🇷 +54</option>
+              <option value="+55">🇧🇷 +55</option>
+              <option value="+56">🇨🇱 +56</option>
+              <option value="+57">🇨🇴 +57</option>
+              <option value="+58">🇻🇪 +58</option>
+              <option value="+27">🇿🇦 +27</option>
+              <option value="+254">🇰🇪 +254</option>
+              <option value="+234">🇳🇬 +234</option>
+              <option value="+256">🇺🇬 +256</option>
+              <option value="+260">🇿🇲 +260</option>
+            </select>
+            <input className="phone-input" type="tel" name="phone_raw" placeholder="Telefon" inputMode="tel" required />
+          </div>
 
-  <div className="phone-field">
-    <select name="phone_code" className="phone-code" defaultValue="+90" aria-label="Ülke kodu" required>
-      <option value="+90">🇹🇷 +90</option>
-      <option value="+1">🇺🇸 +1</option>
-      <option value="+44">🇬🇧 +44</option>
-      <option value="+49">🇩🇪 +49</option>
-      <option value="+33">🇫🇷 +33</option>
-      <option value="+39">🇮🇹 +39</option>
-      <option value="+34">🇪🇸 +34</option>
-      <option value="+7">🇷🇺 +7</option>
-      <option value="+30">🇬🇷 +30</option>
-      <option value="+31">🇳🇱 +31</option>
-      <option value="+32">🇧🇪 +32</option>
-      <option value="+46">🇸🇪 +46</option>
-      <option value="+47">🇳🇴 +47</option>
-      <option value="+45">🇩🇰 +45</option>
-      <option value="+43">🇦🇹 +43</option>
-      <option value="+41">🇨🇭 +41</option>
-      <option value="+351">🇵🇹 +351</option>
-      <option value="+48">🇵🇱 +48</option>
-      <option value="+420">🇨🇿 +420</option>
-      <option value="+421">🇸🇰 +421</option>
-      <option value="+36">🇭🇺 +36</option>
-      <option value="+40">🇷🇴 +40</option>
-      <option value="+380">🇺🇦 +380</option>
-      <option value="+962">🇯🇴 +962</option>
-      <option value="+971">🇦🇪 +971</option>
-      <option value="+974">🇶🇦 +974</option>
-      <option value="+20">🇪🇬 +20</option>
-      <option value="+212">🇲🇦 +212</option>
-      <option value="+216">🇹🇳 +216</option>
-      <option value="+92">🇵🇰 +92</option>
-      <option value="+91">🇮🇳 +91</option>
-      <option value="+62">🇮🇩 +62</option>
-      <option value="+60">🇲🇾 +60</option>
-      <option value="+65">🇸🇬 +65</option>
-      <option value="+63">🇵🇭 +63</option>
-      <option value="+66">🇹🇭 +66</option>
-      <option value="+84">🇻🇳 +84</option>
-      <option value="+81">🇯🇵 +81</option>
-      <option value="+82">🇰🇷 +82</option>
-      <option value="+86">🇨🇳 +86</option>
-      <option value="+61">🇦🇺 +61</option>
-      <option value="+64">🇳🇿 +64</option>
-      <option value="+1-CA">🇨🇦 +1</option>
-      <option value="+52">🇲🇽 +52</option>
-      <option value="+54">🇦🇷 +54</option>
-      <option value="+55">🇧🇷 +55</option>
-      <option value="+56">🇨🇱 +56</option>
-      <option value="+57">🇨🇴 +57</option>
-      <option value="+58">🇻🇪 +58</option>
-      <option value="+27">🇿🇦 +27</option>
-      <option value="+254">🇰🇪 +254</option>
-      <option value="+234">🇳🇬 +234</option>
-      <option value="+256">🇺🇬 +256</option>
-      <option value="+260">🇿🇲 +260</option>
-    </select>
-    <input className="phone-input" type="tel" name="phone_raw" placeholder="Telefon" inputMode="tel" required />
-  </div>
+          <textarea className="msg" name="message" placeholder="Mesaj" rows="3"></textarea>
 
-  <textarea className="msg" name="message" placeholder="Mesaj" rows="3"></textarea>
+          <label className="consent">
+            <input type="checkbox" name="consent" required /> Onaylıyorum
+          </label>
 
-  <label className="consent">
-    <input type="checkbox" name="consent" required /> Onaylıyorum
-  </label>
-  <p className="kvkk">
-    Kişisel verilerimin işlenmesine, AdsHigh'ın reklam, duyuru, bilgi, kampanya vb.
-    konularda şahsıma ticari elektronik ileti göndermesine açık rıza veriyorum.
-  </p>
+          <p className="kvkk">
+            Kişisel verilerimin işlenmesine, AdsHigh'ın reklam, duyuru, bilgi, kampanya vb.
+            konularda şahsıma ticari elektronik ileti göndermesine açık rıza veriyorum.
+          </p>
 
-  {/* GİZLİ ALANLAR */}
-  <input type="hidden" name="_subject" value="AdsHigh - Yeni Form (Footer)" />
-  <input type="hidden" name="_gotcha" />
-  <input type="hidden" name="phone" value="" />
-  <input type="hidden" name="utm_source" value="" />
-  <input type="hidden" name="utm_medium" value="" />
-  <input type="hidden" name="utm_campaign" value="" />
-  <input type="hidden" name="page_url" value="" />
-  <input type="hidden" name="page_path" value="" />
+          <input type="hidden" name="_subject" value="AdsHigh - Yeni Form (Footer)" />
+          <input type="hidden" name="_gotcha" />
+          <input type="hidden" name="phone" value="" />
+          <input type="hidden" name="utm_source" value="" />
+          <input type="hidden" name="utm_medium" value="" />
+          <input type="hidden" name="utm_campaign" value="" />
+          <input type="hidden" name="page_url" value="" />
+          <input type="hidden" name="page_path" value="" />
 
-  <button type="submit">Gönder</button>
-</form>
+          <button type="submit">Gönder</button>
+        </form>
       </div>
 
       <div className="footer-bottom">
@@ -556,8 +569,9 @@ function FooterStyles(){
         color:var(--f-ink);
         padding:36px 0 16px;
         border-top:1px solid var(--f-line);
-        margin-top:40px; /* üst blokla nefes */
+        margin-top:40px;
       }
+
       .footer--brand .footer-top{
         display:grid;
         grid-template-columns:1.1fr 1fr 1fr 1.2fr;
@@ -566,17 +580,28 @@ function FooterStyles(){
         padding-bottom:14px;
         border-bottom:1px solid var(--f-line);
       }
+
       .footer--brand .f-logo{ font-size:24px; display:inline-flex; gap:6px }
       .footer--brand .f-desc{ color:var(--f-muted); margin:8px 0 12px; max-width:46ch; font-size:14px; line-height:1.5 }
       .footer--brand .f-social{ display:flex; gap:10px }
       .footer--brand .f-social a{ display:grid; place-items:center; width:34px; height:34px; border-radius:9px; border:1px solid var(--f-line); color:#cfd4ff; }
       .footer--brand .f-social a:hover{ background:var(--f-grad); color:#fff; border-color:transparent; box-shadow:0 6px 18px rgba(124,58,237,.28)}
+
+      .footer--brand .google-partner{
+        margin-top:20px;
+      }
+
+      .footer--brand .google-partner img{
+        width:160px;
+        height:auto;
+        display:block;
+      }
+
       .footer--brand h5{ margin:0 0 8px; font-size:15px; font-weight:800; letter-spacing:.1px }
       .footer--brand .f-list{ list-style:none; padding:0; margin:0; display:grid; gap:6px; font-size:14px }
       .footer--brand .f-list a{ color:var(--f-muted) }
       .footer--brand .f-list a:hover{ color:#fff; text-decoration:underline }
 
-      /* Form */
       .footer--brand .f-form{ display:grid; gap:8px; font-size:14px }
       .footer--brand .f-form-head h3{ margin:0; font-size:20px }
       .footer--brand .f-form-head p{ margin:4px 0 10px; color:var(--f-muted); font-size:14px }
@@ -597,9 +622,9 @@ function FooterStyles(){
       .footer--brand .footer-bottom{
         display:flex; justify-content:center; padding:10px 0 0; color:var(--f-muted); font-size:13px;
       }
+
       .footer-bottom__inner{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:center }
 
-      /* Mobil: FORM EN ÜSTE, sonra diğer kolonlar */
       @media (max-width:900px){
         .footer--brand{ padding:28px 0 12px; margin-top:28px }
         .footer--brand .footer-top{
@@ -618,6 +643,8 @@ function FooterStyles(){
         .footer--brand h5{ font-size:13.5px; margin-bottom:6px; }
         .footer--brand .f-list{ gap:4px; font-size:13px; }
         .footer--brand .f-social a{ width:32px; height:32px; border-radius:8px; }
+        .footer--brand .google-partner{ margin-top:16px; }
+        .footer--brand .google-partner img{ width:150px; }
         .footer--brand .footer-bottom{ font-size:12px; padding-top:8px; }
       }
     `}</style>
